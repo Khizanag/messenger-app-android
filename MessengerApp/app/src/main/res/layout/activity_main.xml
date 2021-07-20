@@ -6,91 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <!-- avatar -->
-    <ImageView
-        android:id="@+id/login_avatar"
-        android:layout_width="@dimen/avatar_width"
-        android:layout_height="@dimen/avatar_height"
-        android:layout_marginTop="@dimen/avatar_top_offset"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar_image_placeholder"
-        android:contentDescription="@string/todo" />
-
-    <!-- nickname text field -->
-    <EditText
-        android:id="@+id/login_nickname_text_field"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/text_fields_height"
-        android:layout_marginStart="@dimen/text_fields_margins"
-        android:layout_marginEnd="@dimen/text_fields_margins"
-        android:layout_marginTop="@dimen/avatar_bottom_offset"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_avatar"
-        android:background="@drawable/text_fields_shape"
-        android:hint="@string/enter_your_nickname"
-        android:textSize="@dimen/text_fields_text_size"
-        android:autofillHints="" />
-
-    <!-- password text field -->
-    <EditText
-        android:id="@+id/login_password_text_field"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/text_fields_height"
-        android:layout_marginStart="@dimen/text_fields_margins"
-        android:layout_marginEnd="@dimen/text_fields_margins"
-        android:layout_marginTop="@dimen/password_text_field_top_offset"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_nickname_text_field"
-        android:background="@drawable/text_fields_shape"
-        android:hint="@string/enter_your_password"
-        android:textSize="@dimen/text_fields_text_size"
-        tools:ignore="TextFields"
-        android:autofillHints="" />
-
-    <!-- what i do text field -->
-    <EditText
-        android:id="@+id/what_i_do"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/text_fields_height"
-        android:layout_marginStart="@dimen/text_fields_margins"
-        android:layout_marginEnd="@dimen/text_fields_margins"
-        android:layout_marginTop="@dimen/what_i_do_top_offset"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password_text_field"
-        android:background="@drawable/text_fields_shape"
-        android:hint="@string/what_i_do"
-        android:textSize="@dimen/text_fields_text_size"
-        tools:ignore="TextFields"
-        android:autofillHints="" />
-
-
-    <!-- sign up button -->
-    <Button
-        android:id="@+id/sign_in_button"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginTop="@dimen/what_i_do_bottom_offset"
-        android:text="@string/sign_up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/what_i_do"
-        android:textAlignment="center"
-        android:backgroundTint="@color/buttons_background_color"/>
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout> 
