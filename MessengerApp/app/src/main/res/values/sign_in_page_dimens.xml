@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="avatar_top_offset">100dp</dimen>
+    <dimen name="avatar_bottom_offset">30dp</dimen>
+    <dimen name="password_text_field_top_offset">8dp</dimen>
+    <dimen name="password_bottom_offset">12dp</dimen>
+    <dimen name="login_page_sign_up_button_bottom_offset">8dp</dimen>
+    <dimen name="login_page_sign_up_button_top_offset"> 8dp </dimen>
+    <dimen name="text_field_corner_radius"> 30dp </dimen>
+    <dimen name="button_corner_radius"> 12dp </dimen>
+    <dimen name="text_fields_text_size"> 14sp </dimen>
+    <dimen name="avatar_height"> 120dp </dimen>
+    <dimen name="avatar_width"> 120dp </dimen>
+</resources>
