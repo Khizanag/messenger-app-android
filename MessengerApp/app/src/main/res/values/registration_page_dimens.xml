@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="profession_text_field_bottom_offset"> 50dp </dimen>
+    <dimen name="update_button_bottom_offset"> 20dp </dimen>
+</resources>
