@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
-    !-- avatar -->
+    android:layout_height="match_parent"
+    tools:ignore="ExtraText">
+
+
+    <!-- avatar -->
     <ImageView
         android:id="@+id/login_avatar"
         android:layout_width="@dimen/avatar_width"
@@ -33,7 +35,8 @@
         app:layout_constraintTop_toBottomOf="@+id/login_avatar"
         android:background="@drawable/text_fields_shape"
         android:textSize="@dimen/text_fields_text_size"
-        android:autofillHints="" />
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <!-- profession text field -->
     <EditText
@@ -51,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_nickname_text_field"
         android:background="@drawable/text_fields_shape"
         android:textSize="@dimen/text_fields_text_size"
-        tools:ignore="TextFields"
+        tools:ignore="LabelFor,TextFields"
         android:autofillHints="" />
 
     <!-- update button -->

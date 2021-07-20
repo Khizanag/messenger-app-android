@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <!-- avatar -->
     <ImageView
         android:id="@+id/login_avatar"
@@ -20,12 +21,14 @@
     <!-- nickname text field -->
     <EditText
         android:id="@+id/login_nickname_text_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_fields_height"
+        android:layout_marginStart="@dimen/text_fields_margins"
+        android:layout_marginEnd="@dimen/text_fields_margins"
         android:layout_marginTop="@dimen/avatar_bottom_offset"
         android:ems="10"
         android:inputType="textPersonName"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_avatar"
@@ -37,12 +40,14 @@
     <!-- password text field -->
     <EditText
         android:id="@+id/login_password_text_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/text_fields_height"
+        android:layout_marginStart="@dimen/text_fields_margins"
+        android:layout_marginEnd="@dimen/text_fields_margins"
         android:layout_marginTop="@dimen/password_text_field_top_offset"
         android:ems="10"
         android:inputType="textPersonName"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_nickname_text_field"
@@ -57,7 +62,7 @@
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/button_height"
         android:layout_marginTop="@dimen/password_bottom_offset"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +87,7 @@
     <Button
         android:id="@+id/login_page_sign_up_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:layout_marginBottom="@dimen/login_page_sign_up_button_bottom_offset"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -90,6 +95,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@color/white"
         android:textColor="@color/black" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
