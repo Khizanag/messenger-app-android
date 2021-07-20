@@ -4,6 +4,8 @@
     <dimen name="avatar_bottom_offset">30dp</dimen>
     <dimen name="password_text_field_top_offset">8dp</dimen>
     <dimen name="password_bottom_offset">12dp</dimen>
+    <dimen name="what_i_do_top_offset">15dp</dimen>
+    <dimen name="what_i_do_bottom_offset">45dp</dimen>
     <dimen name="login_page_sign_up_button_bottom_offset">8dp</dimen>
     <dimen name="login_page_sign_up_button_top_offset"> 8dp </dimen>
     <dimen name="text_field_corner_radius"> 30dp </dimen>
