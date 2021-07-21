@@ -14,14 +14,15 @@
         android:layout_marginStart="@dimen/main_page_avatar_start_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar_image_placeholder" />
+        app:srcCompat="@drawable/avatar_image_placeholder"
+        android:contentDescription="@string/todo" />
 
     <!-- person name -->
     <TextView
         android:id="@+id/person_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Name Surname"
+        tools:text="@string/person_name_template"
         android:layout_marginStart="@dimen/main_page_person_name_start_margin"
         app:layout_constraintStart_toEndOf="@+id/main_page_avatar"
         app:layout_constraintTop_toTopOf="@+id/main_page_avatar"
@@ -36,7 +37,7 @@
         android:layout_marginTop="@dimen/main_page_message_preview_top_margin"
         app:layout_constraintStart_toStartOf="@+id/person_name"
         app:layout_constraintTop_toBottomOf="@+id/person_name"
-        tools:text="I will be at home in an hour"
+        tools:text="@string/message_preview_template"
         android:textSize="@dimen/main_page_message_preview_text_size"
         android:textColor="@color/main_page_message_preview_color"/>
 

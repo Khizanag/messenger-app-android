@@ -15,4 +15,7 @@
     <string name="todo">TODO</string>
     <string name="what_i_do">What I do</string>
     <string name="not_registered">Not registered?</string>
+
+    <string name="person_name_template">Name Surname</string>
+    <string name="message_preview_template">Name Surname</string>
 </resources>
