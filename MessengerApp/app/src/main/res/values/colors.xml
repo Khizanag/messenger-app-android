@@ -14,4 +14,13 @@
     <color name="login_page_sign_up_button_color">#8a8a8a</color>
 
     <color name="login_page_not_registered_text_view_color">#8a8a8a</color>
+
+
+    <color name="main_page_person_name_color">#63687a</color>
+    <color name="main_page_message_preview_color">#b1b6c5</color>
+    <color name="main_page_delivery_time_color">#b0b4c0</color>
+
+
+
+
 </resources>

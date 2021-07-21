@@ -81,8 +81,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/update_button"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black" />
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:strokeColor="@color/login_page_sign_up_button_color"
+        android:textColor="@color/login_page_sign_up_button_color" />
 
 
 

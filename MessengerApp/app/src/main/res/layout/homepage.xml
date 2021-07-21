@@ -94,6 +94,4 @@
         android:textColor="@color/login_page_sign_up_button_color"/>
 
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
