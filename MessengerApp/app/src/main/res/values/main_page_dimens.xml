@@ -13,8 +13,9 @@
 
     <dimen name="main_page_delivery_time_end_margin">8dp</dimen>
 
-    <dimen name="main_page_magnifier_top_margin">12dp</dimen>
+    <dimen name="main_page_magnifier_top_margin">28dp</dimen>
     <dimen name="main_page_magnifier_start_margin">8dp</dimen>
+    <dimen name="main_page_search_box_top_margin">16dp</dimen>
     <dimen name="main_page_search_box_horizontal_padding">40dp</dimen>
 
 </resources>

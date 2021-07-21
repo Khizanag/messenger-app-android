@@ -43,6 +43,7 @@
                 android:inputType="textPersonName"
                 android:hint="@string/search"
                 android:background="@drawable/text_fields_shape"
+                android:layout_marginTop="@dimen/main_page_search_box_top_margin"
                 android:paddingHorizontal="@dimen/main_page_search_box_horizontal_padding"
                 android:alpha=".7"
                 android:autofillHints="" />
@@ -62,7 +63,6 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
 
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 

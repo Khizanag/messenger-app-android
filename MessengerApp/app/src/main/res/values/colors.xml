@@ -8,8 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="default_color">#5479f1</color>
+
     <color name="text_fields_background_color">#f3f6ff</color>
-    <color name="buttons_background_color">#5479f1</color>
+    <color name="buttons_background_color">@color/default_color</color>
 
     <color name="login_page_sign_up_button_color">#8a8a8a</color>
 
@@ -20,7 +22,7 @@
     <color name="main_page_message_preview_color">#b1b6c5</color>
     <color name="main_page_delivery_time_color">#b0b4c0</color>
 
-
+    <color name="floating_button_color">@color/default_color</color>
 
 
 </resources>

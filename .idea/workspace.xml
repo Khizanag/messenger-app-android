@@ -28,11 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14154b33-1952-4465-8866-0aad3ff32b2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/messenger-app-android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MessengerApp/app/src/main/res/layout/homepage.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MessengerApp/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MessengerApp/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MessengerApp/app/src/main/res/layout/main_page_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MessengerApp/app/src/main/res/layout/main_page_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MessengerApp/app/src/main/res/values/main_page_dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MessengerApp/app/src/main/res/values/main_page_dimens.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,5 +96,13 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="384" y="138" key="#Project_Structure/-1920.0.1920.1080/0.0.1792.1120@0.0.1792.1120" timestamp="1626808646311" />
+    <state x="100" y="100" width="1592" height="920" key="DiffContextDialog" timestamp="1626887716007">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="100" y="100" width="1592" height="920" key="DiffContextDialog/-1920.25.1920.1055/0.0.1792.1120@0.0.1792.1120" timestamp="1626887716007" />
+    <state x="100" y="100" width="1592" height="920" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1626887716008">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="100" y="100" width="1592" height="920" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/-1920.25.1920.1055/0.0.1792.1120@0.0.1792.1120" timestamp="1626887716008" />
   </component>
 </project>

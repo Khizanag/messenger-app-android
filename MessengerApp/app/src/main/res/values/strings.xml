@@ -19,4 +19,8 @@
 
     <string name="person_name_template">Name Surname</string>
     <string name="message_preview_template">I will be at home in an hour</string>
+
+    <!-- nav bar icon titles -->
+    <string name="nav_bar_home_icon">Home</string>
+    <string name="nav_bar_settings_icon">Settings</string>
 </resources>
