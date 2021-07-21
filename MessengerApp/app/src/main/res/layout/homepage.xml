@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <!-- avatar -->
     <ImageView
@@ -16,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/avatar_image_placeholder"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo"  />
 
     <!-- nickname text field -->
     <EditText
@@ -28,12 +26,12 @@
         android:layout_marginTop="@dimen/avatar_bottom_offset"
         android:ems="10"
         android:inputType="textPersonName"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_avatar"
-        android:background="@drawable/text_fields_shape"
         android:hint="@string/enter_your_nickname"
+        android:background="@drawable/text_fields_shape"
+        android:gravity="center"
         android:textSize="@dimen/text_fields_text_size"
         android:autofillHints="" />
 
@@ -46,17 +44,15 @@
         android:layout_marginEnd="@dimen/text_fields_margins"
         android:layout_marginTop="@dimen/password_text_field_top_offset"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:gravity="center"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_nickname_text_field"
-        android:background="@drawable/text_fields_shape"
         android:hint="@string/enter_your_password"
+        android:background="@drawable/text_fields_shape"
+        android:gravity="center"
         android:textSize="@dimen/text_fields_text_size"
-        tools:ignore="TextFields"
         android:autofillHints="" />
-
 
     <!-- sign in button -->
     <Button
@@ -78,9 +74,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/login_page_sign_up_button_top_offset"
         android:text="@string/not_registered"
+        android:textColor="@color/login_page_not_registered_text_view_color"
         app:layout_constraintBottom_toTopOf="@+id/login_page_sign_up_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- sign up button -->
@@ -93,8 +89,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black" />
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:strokeColor="@color/login_page_sign_up_button_color"
+        android:textColor="@color/login_page_sign_up_button_color"/>
+
 
 
 
