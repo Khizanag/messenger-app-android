@@ -10,6 +10,7 @@
     <!-- hints -->
     <string name="enter_your_nickname">Enter your nickname</string>
     <string name="enter_your_password">Enter your password</string>
+    <string name="search">Search</string>
 
     <!-- other -->
     <string name="todo">TODO</string>
@@ -17,5 +18,5 @@
     <string name="not_registered">Not registered?</string>
 
     <string name="person_name_template">Name Surname</string>
-    <string name="message_preview_template">Name Surname</string>
+    <string name="message_preview_template">I will be at home in an hour</string>
 </resources>
