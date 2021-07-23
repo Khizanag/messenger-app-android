@@ -7,7 +7,7 @@
     tools:context=".login.SignUpActivity">
 
     <!-- avatar -->
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/sign_up_avatar"
         android:layout_width="@dimen/avatar_width"
         android:layout_height="@dimen/avatar_height"
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar_image_placeholder"
+        android:src="@drawable/avatar_image_placeholder"
         android:contentDescription="@string/todo" />
 
     <!-- nickname text field -->
