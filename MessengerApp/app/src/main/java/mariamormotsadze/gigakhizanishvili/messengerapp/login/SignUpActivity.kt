@@ -7,39 +7,26 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
+import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var nicknameTextField: EditText
-    private lateinit var passwordTextField: EditText
-    private lateinit var professionTextField: EditText
-    private lateinit var signUpButton: Button
+    private lateinit var activitySignUpBinding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
-        init()
+        activitySignUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(activitySignUpBinding.root)
+        setListeners()
     }
 
-    private fun init(){
-        initTextFields()
-        initButtons()
-        Log.i("LoginPage", "here")
-    }
-
-    private fun initTextFields(){
-        nicknameTextField = findViewById(R.id.login_nickname_text_field)
-        passwordTextField = findViewById(R.id.login_password_text_field)
-        professionTextField = findViewById(R.id.what_i_do)
-    }
-
-    private fun initButtons(){
-        signUpButton = findViewById(R.id.sign_up_button)
-        signUpButton.setOnClickListener(){
-            val nickname = nicknameTextField.text.toString()
-            val password = passwordTextField.text.toString()
-            val profession = professionTextField.text.toString()
+    private fun setListeners(){
+        activitySignUpBinding.signUpButton.setOnClickListener(){
+            val nickname = activitySignUpBinding.signUpNicknameTextField.text.toString()
+            val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
+            val profession = activitySignUpBinding.whatIDo.text.toString()
             validateInput(nickname, password, profession)
         }
     }
