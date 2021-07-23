@@ -12,22 +12,22 @@
         android:layout_height="@dimen/main_page_avatar_height"
         android:layout_marginTop="@dimen/main_page_avatar_top_margin"
         android:layout_marginStart="@dimen/main_page_avatar_start_margin"
+        android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar_image_placeholder"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/avatar_image_placeholder" />
 
     <!-- person name -->
     <TextView
         android:id="@+id/person_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/person_name_template"
+        android:textSize="@dimen/main_page_person_name_text_size"
+        android:textColor="@color/main_page_person_name_color"
         android:layout_marginStart="@dimen/main_page_person_name_start_margin"
         app:layout_constraintStart_toEndOf="@+id/main_page_avatar"
         app:layout_constraintTop_toTopOf="@+id/main_page_avatar"
-        android:textSize="@dimen/main_page_person_name_text_size"
-        android:textColor="@color/main_page_person_name_color"/>
+        tools:text="@string/person_name_template" />
 
     <!-- message preview -->
     <TextView
@@ -35,21 +35,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/main_page_message_preview_top_margin"
+        android:textSize="@dimen/main_page_message_preview_text_size"
+        android:textColor="@color/main_page_message_preview_color"
         app:layout_constraintStart_toStartOf="@+id/person_name"
         app:layout_constraintTop_toBottomOf="@+id/person_name"
-        tools:text="@string/message_preview_template"
-        android:textSize="@dimen/main_page_message_preview_text_size"
-        android:textColor="@color/main_page_message_preview_color"/>
+        tools:text="@string/message_preview_template" />
 
     <!-- message delivery time -->
     <TextView
         android:id="@+id/message_delivery_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="5m"
         android:textSize="@dimen/main_page_message_preview_text_size"
         android:layout_marginEnd="@dimen/main_page_delivery_time_end_margin"
+        android:textColor="@color/main_page_delivery_time_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/person_name"
-        android:textColor="@color/main_page_delivery_time_color"/>
+        tools:text="5m" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

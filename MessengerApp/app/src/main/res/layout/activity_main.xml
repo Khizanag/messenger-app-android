@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
         <!-- avatar -->
@@ -12,11 +13,11 @@
             android:layout_width="@dimen/avatar_width"
             android:layout_height="@dimen/avatar_height"
             android:layout_marginTop="@dimen/avatar_top_offset"
+            android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/avatar_image_placeholder"
-            android:contentDescription="@string/todo"  />
+            app:srcCompat="@drawable/avatar_image_placeholder" />
 
         <!-- nickname text field -->
         <EditText
@@ -26,16 +27,16 @@
             android:layout_marginStart="@dimen/text_fields_margins"
             android:layout_marginEnd="@dimen/text_fields_margins"
             android:layout_marginTop="@dimen/avatar_bottom_offset"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_avatar"
-            android:hint="@string/enter_your_nickname"
             android:background="@drawable/text_fields_shape"
+            android:hint="@string/enter_your_nickname"
+            android:inputType="textPersonName"
             android:gravity="center"
             android:textSize="@dimen/text_fields_text_size"
-            android:autofillHints="" />
+            android:autofillHints=""
+            android:ems="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_avatar" />
 
         <!-- password text field -->
         <EditText
@@ -45,16 +46,16 @@
             android:layout_marginStart="@dimen/text_fields_margins"
             android:layout_marginEnd="@dimen/text_fields_margins"
             android:layout_marginTop="@dimen/password_text_field_top_offset"
-            android:ems="10"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_nickname_text_field"
             android:hint="@string/enter_your_password"
             android:background="@drawable/text_fields_shape"
+            android:autofillHints=""
             android:gravity="center"
             android:textSize="@dimen/text_fields_text_size"
-            android:autofillHints="" />
+            android:ems="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_nickname_text_field" />
 
         <!-- sign in button -->
         <Button
@@ -63,11 +64,11 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginTop="@dimen/password_bottom_offset"
             android:text="@string/sign_in"
+            android:textAlignment="center"
+            android:backgroundTint="@color/buttons_background_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_password_text_field"
-            android:textAlignment="center"
-            android:backgroundTint="@color/buttons_background_color"/>
+            app:layout_constraintTop_toBottomOf="@+id/login_password_text_field" />
 
         <!-- not registered text view -->
         <TextView
@@ -88,13 +89,11 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginBottom="@dimen/login_page_sign_up_button_bottom_offset"
             android:text="@string/sign_up"
+            android:textColor="@color/login_page_sign_up_button_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:strokeColor="@color/login_page_sign_up_button_color"
-            android:textColor="@color/login_page_sign_up_button_color"/>
-
-
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

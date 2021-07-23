@@ -17,7 +17,6 @@
             app:toolbarId="@+id/toolbar"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
-
             app:contentScrim="?attr/colorPrimary">
 
             <ImageView
@@ -54,24 +53,22 @@
                 android:id="@+id/magnifier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/ic_menu_search"
                 android:layout_marginTop="@dimen/main_page_magnifier_top_margin"
                 android:layout_marginStart="@dimen/main_page_magnifier_start_margin"
-                android:contentDescription="@string/todo" />
+                android:contentDescription="@string/todo"
+                app:srcCompat="@android:drawable/ic_menu_search" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/main_page_chat_cell" />
-
     </androidx.core.widget.NestedScrollView>
 
 

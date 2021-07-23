@@ -25,7 +25,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun setListeners(){
-        activitySignUpBinding.signUpButton.setOnClickListener(){
+        activitySignUpBinding.signUpButton.setOnClickListener {
             val nickname = activitySignUpBinding.signUpNicknameTextField.text.toString()
             val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
             val profession = activitySignUpBinding.whatIDo.text.toString()
@@ -39,7 +39,7 @@ class SignUpActivity : AppCompatActivity() {
         activitySignUpBinding.signUpAvatar.setOnClickListener(){
             Log.i("SignupPage", "avatar pressed")
 
-            var gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, PICK_IMAGE)
 
         }

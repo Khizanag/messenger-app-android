@@ -7,18 +7,17 @@
     tools:ignore="ExtraText"
     tools:context=".fragments.SettingsFragment">
 
-
     <!-- avatar -->
     <ImageView
         android:id="@+id/sign_up_avatar"
         android:layout_width="@dimen/avatar_width"
         android:layout_height="@dimen/avatar_height"
         android:layout_marginTop="@dimen/avatar_top_offset"
+        android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar_image_placeholder"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/avatar_image_placeholder" />
 
     <!-- nickname text field -->
     <EditText
@@ -31,12 +30,12 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:gravity="center_horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_avatar"
         android:background="@drawable/text_fields_shape"
         android:textSize="@dimen/text_fields_text_size"
         android:autofillHints=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_avatar"
         tools:ignore="LabelFor" />
 
     <!-- profession text field -->
@@ -50,13 +49,13 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:gravity="center_horizontal"
+        android:background="@drawable/text_fields_shape"
+        android:textSize="@dimen/text_fields_text_size"
+        android:autofillHints=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_up_nickname_text_field"
-        android:background="@drawable/text_fields_shape"
-        android:textSize="@dimen/text_fields_text_size"
-        tools:ignore="LabelFor,TextFields"
-        android:autofillHints="" />
+        tools:ignore="LabelFor,TextFields" />
 
     <!-- update button -->
     <Button
@@ -65,12 +64,11 @@
         android:layout_height="@dimen/button_height"
         android:layout_marginTop="@dimen/profession_text_field_bottom_offset"
         android:text="@string/update"
+        android:textAlignment="center"
+        android:backgroundTint="@color/buttons_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profession_text_field"
-        android:textAlignment="center"
-        android:backgroundTint="@color/buttons_background_color"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/profession_text_field" />
 
     <!-- sign out button -->
     <Button
@@ -79,13 +77,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/update_button_bottom_offset"
         android:text="@string/sign_out"
+        android:textColor="@color/login_page_sign_up_button_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/update_button"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         app:strokeColor="@color/login_page_sign_up_button_color"
-        android:textColor="@color/login_page_sign_up_button_color" />
-
-
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
