@@ -1,10 +1,10 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.login
+package mariamormotsadze.gigakhizanishvili.messengerapp.signin
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
-class LogInActivity: AppCompatActivity() {
+class SignInActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.SignUpActivity">
+    tools:context=".signin.SignUpActivity">
 
     <!-- avatar -->
     <de.hdodenhof.circleimageview.CircleImageView
@@ -46,7 +46,7 @@
         android:layout_marginEnd="@dimen/text_fields_margins"
         android:layout_marginTop="@dimen/password_text_field_top_offset"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
