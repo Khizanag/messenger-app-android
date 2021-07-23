@@ -1,35 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        <!-- avatar -->
+        <ImageView
+            android:id="@+id/login_avatar"
+            android:layout_width="@dimen/avatar_width"
+            android:layout_height="@dimen/avatar_height"
+            android:layout_marginTop="@dimen/avatar_top_offset"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/avatar_image_placeholder"
+            android:contentDescription="@string/todo"  />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            app:menu="@menu/bottom_nav_menu" />
-    </com.google.android.material.bottomappbar.BottomAppBar>
+        <!-- nickname text field -->
+        <EditText
+            android:id="@+id/login_nickname_text_field"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_fields_height"
+            android:layout_marginStart="@dimen/text_fields_margins"
+            android:layout_marginEnd="@dimen/text_fields_margins"
+            android:layout_marginTop="@dimen/avatar_bottom_offset"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_avatar"
+            android:hint="@string/enter_your_nickname"
+            android:background="@drawable/text_fields_shape"
+            android:gravity="center"
+            android:textSize="@dimen/text_fields_text_size"
+            android:autofillHints="" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/floating_button_color"
-        android:contentDescription="@string/todo"
-        app:layout_anchor="@id/bottom_app_bar"
-        android:src="@drawable/ic_add"
-        app:tint="@color/white"/>
+        <!-- password text field -->
+        <EditText
+            android:id="@+id/login_password_text_field"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/text_fields_height"
+            android:layout_marginStart="@dimen/text_fields_margins"
+            android:layout_marginEnd="@dimen/text_fields_margins"
+            android:layout_marginTop="@dimen/password_text_field_top_offset"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_nickname_text_field"
+            android:hint="@string/enter_your_password"
+            android:background="@drawable/text_fields_shape"
+            android:gravity="center"
+            android:textSize="@dimen/text_fields_text_size"
+            android:autofillHints="" />
+
+        <!-- sign in button -->
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/password_bottom_offset"
+            android:text="@string/sign_in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_password_text_field"
+            android:textAlignment="center"
+            android:backgroundTint="@color/buttons_background_color"/>
+
+        <!-- not registered text view -->
+        <TextView
+            android:id="@+id/not_registered_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/login_page_sign_up_button_top_offset"
+            android:text="@string/not_registered"
+            android:textColor="@color/login_page_not_registered_text_view_color"
+            app:layout_constraintBottom_toTopOf="@+id/login_page_sign_up_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- sign up button -->
+        <Button
+            android:id="@+id/login_page_sign_up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginBottom="@dimen/login_page_sign_up_button_bottom_offset"
+            android:text="@string/sign_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="@color/login_page_sign_up_button_color"
+            android:textColor="@color/login_page_sign_up_button_color"/>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

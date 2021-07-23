@@ -23,4 +23,13 @@
     <!-- nav bar icon titles -->
     <string name="nav_bar_home_icon">Home</string>
     <string name="nav_bar_settings_icon">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- toast messages -->
+    <string name="empty_nickname_error">Please Enter Nickname</string>
+    <string name="empty_password_error">Please Enter Password</string>
+    <string name="empty_profession_error">Please Enter Profession</string>
+
 </resources>
