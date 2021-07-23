@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.fragments
+package mariamormotsadze.gigakhizanishvili.messengerapp.Constants
 
 class Constants {
     companion object{
