@@ -12,6 +12,8 @@ import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
+import mariamormotsadze.gigakhizanishvili.messengerapp.fragments.Constants.Companion.PICK_IMAGE
+import mariamormotsadze.gigakhizanishvili.messengerapp.homepage.HomePageActivity
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -30,14 +32,19 @@ class SignUpActivity : AppCompatActivity() {
             val nickname = activitySignUpBinding.signUpNicknameTextField.text.toString()
             val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
             val profession = activitySignUpBinding.whatIDo.text.toString()
-            validateInput(nickname, password, profession)
+            val isValid = validateInput(nickname, password, profession)
+            if(isValid){
+                val intent = Intent(this, HomePageActivity::class .java)
+                startActivity(intent)
+            }
         }
 
         activitySignUpBinding.signUpAvatar.setOnClickListener(){
             Log.i("SignupPage", "avatar pressed")
 
             var gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, 100)
+            startActivityForResult(gallery, PICK_IMAGE)
+
         }
     }
 
@@ -48,17 +55,22 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(nickname: String, password: String, profession: String){
+    private fun validateInput(nickname: String, password: String, profession: String): Boolean{
         when {
             nickname.isEmpty() -> {
                 Toast.makeText(this, R.string.empty_nickname_error, Toast.LENGTH_SHORT).show()
+                return false
             }
             password.isEmpty() -> {
                 Toast.makeText(this, R.string.empty_password_error, Toast.LENGTH_SHORT).show()
+                return false
             }
             profession.isEmpty() -> {
                 Toast.makeText(this, R.string.empty_profession_error, Toast.LENGTH_SHORT).show()
+                return false
             }
         }
+
+        return true
     }
 }

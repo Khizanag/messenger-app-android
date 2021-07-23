@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         activityMainBinding.loginPageSignUpButton.setOnClickListener {
             Log.i("LoginPage", "signup button clicked")
-            val i = Intent(this, SignUpActivity::class.java)
-            startActivity(i)
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
 

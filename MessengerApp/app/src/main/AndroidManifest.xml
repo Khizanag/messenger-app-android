@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MessengerApp">
-        <activity android:name=".login.SignUpActivity"></activity>
+        <activity android:name=".homepage.HomePageActivity"></activity>
+        <activity android:name=".login.SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
