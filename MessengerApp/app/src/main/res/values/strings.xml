@@ -11,6 +11,7 @@
     <string name="enter_your_nickname">Enter your nickname</string>
     <string name="enter_your_password">Enter your password</string>
     <string name="search">Search</string>
+    <string name="message">Message</string>
 
     <!-- other -->
     <string name="todo">TODO</string>

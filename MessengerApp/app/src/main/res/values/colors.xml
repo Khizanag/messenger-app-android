@@ -27,4 +27,6 @@
     <color name="message_time_color">#bdc1cb</color>
     <color name="their_message_box_color">#f3f6ff</color>
     <color name="their_message_text_color">#6d7899</color>
+    <color name="message_background_color">#f4f4f4</color>
+    <color name="message_text_color">#b5b5b5</color>
 </resources>
