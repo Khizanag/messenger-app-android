@@ -25,4 +25,6 @@
     <color name="floating_button_color">@color/default_color</color>
 
     <color name="message_time_color">#bdc1cb</color>
+    <color name="their_message_box_color">#f3f6ff</color>
+    <color name="their_message_text_color">#6d7899</color>
 </resources>
