@@ -29,34 +29,28 @@
                 android:contentDescription="@string/todo" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="bottom"
+                app:toolbarId="@+id/toolbar">
+
+                <EditText
+                    android:id="@+id/search_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_fields_height"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="@string/search"
+                    android:background="@drawable/text_fields_shape"
+                    android:layout_marginStart="@dimen/main_page_search_box_screen_offsets"
+                    android:layout_marginEnd="@dimen/main_page_search_box_screen_offsets"
+                    android:paddingHorizontal="@dimen/main_page_search_box_horizontal_padding"
+                    android:alpha=".7"
+                    android:autofillHints=""
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:paddingStart="@dimen/main_page_magnifier_start_margin" />
+
             </androidx.appcompat.widget.Toolbar>
-
-            <!-- search box -->
-            <EditText
-                android:id="@+id/search_box"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/text_fields_height"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="@string/search"
-                android:background="@drawable/text_fields_shape"
-                android:layout_marginTop="@dimen/main_page_search_box_top_margin"
-                android:paddingHorizontal="@dimen/main_page_search_box_horizontal_padding"
-                android:alpha=".7"
-                android:autofillHints="" />
-
-            <!-- search icon - magnifier -->
-            <ImageView
-                android:id="@+id/magnifier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/main_page_magnifier_top_margin"
-                android:layout_marginStart="@dimen/main_page_magnifier_start_margin"
-                android:contentDescription="@string/todo"
-                app:srcCompat="@android:drawable/ic_menu_search" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -70,6 +64,5 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/main_page_chat_cell" />
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
