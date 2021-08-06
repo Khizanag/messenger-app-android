@@ -30,7 +30,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="@dimen/toolbar_height"
                 android:layout_gravity="bottom"
                 app:toolbarId="@+id/toolbar">
 
@@ -38,7 +38,6 @@
                     android:id="@+id/search_box"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/text_fields_height"
-                    android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="@string/search"
                     android:background="@drawable/rounded"

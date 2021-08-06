@@ -60,8 +60,9 @@
     <!-- update button -->
     <Button
         android:id="@+id/update_button"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.3"
         android:layout_marginTop="@dimen/profession_text_field_bottom_offset"
         android:text="@string/update"
         android:textAlignment="center"
@@ -73,8 +74,9 @@
     <!-- sign out button -->
     <Button
         android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.3"
         android:layout_marginTop="@dimen/update_button_bottom_offset"
         android:text="@string/sign_out"
         android:textColor="@color/login_page_sign_up_button_color"

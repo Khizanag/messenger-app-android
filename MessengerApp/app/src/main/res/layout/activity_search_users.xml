@@ -15,7 +15,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="100dp">
 
             <ImageButton
                 android:id="@+id/back"
@@ -33,6 +33,7 @@
                 android:layout_marginEnd="@dimen/main_page_search_box_screen_offsets"
                 android:background="@drawable/rounded"
                 android:hint="@string/search"
+                android:textColorHint="@color/search_box_hint_color"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="@dimen/main_page_search_box_horizontal_padding"
                 android:drawableStart="@android:drawable/ic_menu_search"
@@ -49,7 +50,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/main_page_chat_cell" />
+            tools:listitem="@layout/search_user_page_cell" />
     </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
