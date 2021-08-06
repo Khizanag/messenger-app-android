@@ -13,9 +13,9 @@
     <color name="text_fields_background_color">#f3f6ff</color>
     <color name="buttons_background_color">@color/default_color</color>
 
-    <color name="login_page_sign_up_button_color">#8a8a8a</color>
+    <color name="login_page_sign_up_button_color">#3C3B3B</color>
 
-    <color name="login_page_not_registered_text_view_color">#8a8a8a</color>
+    <color name="login_page_not_registered_text_view_color">#3C3B3B</color>
 
 
     <color name="main_page_person_name_color">#63687a</color>
@@ -29,4 +29,6 @@
     <color name="their_message_text_color">#6d7899</color>
     <color name="message_background_color">#f4f4f4</color>
     <color name="message_text_color">#b5b5b5</color>
+
+    <color name="search_box_hint_color">#828591</color>
 </resources>

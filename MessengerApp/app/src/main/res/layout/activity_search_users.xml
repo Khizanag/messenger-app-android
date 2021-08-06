@@ -33,6 +33,7 @@
                 android:layout_marginEnd="@dimen/main_page_search_box_screen_offsets"
                 android:background="@drawable/text_fields_shape"
                 android:hint="@string/search"
+                android:textColorHint="@color/search_box_hint_color"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="@dimen/main_page_search_box_horizontal_padding"
                 android:drawableStart="@android:drawable/ic_menu_search"

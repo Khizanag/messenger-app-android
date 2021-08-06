@@ -16,5 +16,6 @@
     <dimen name="main_page_magnifier_start_margin">8dp</dimen>
     <dimen name="main_page_search_box_screen_offsets">16dp</dimen>
     <dimen name="main_page_search_box_horizontal_padding">40dp</dimen>
+    <dimen name="toolbar_height">80dp</dimen>
 
 </resources>
