@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             val password = activityMainBinding.loginPasswordTextField.text.toString()
             validateInput(nickname, password)
 
-                val intent = Intent(this, chat::class .java)
+                val intent = Intent(this, ChatActivity::class .java)
                 startActivity(intent)
 
             Log.i("LoginPage", "nickname is $nickname and password is $password ")

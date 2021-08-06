@@ -41,7 +41,7 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:hint="@string/search"
-                    android:background="@drawable/text_fields_shape"
+                    android:background="@drawable/rounded"
                     android:layout_marginStart="@dimen/main_page_search_box_screen_offsets"
                     android:layout_marginEnd="@dimen/main_page_search_box_screen_offsets"
                     android:paddingHorizontal="@dimen/main_page_search_box_horizontal_padding"

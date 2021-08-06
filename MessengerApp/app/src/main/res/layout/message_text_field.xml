@@ -10,7 +10,7 @@
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/message_text_field_top_offset"
-        android:background="@drawable/text_fields_shape"
+        android:background="@drawable/rounded"
         android:layout_marginStart="@dimen/chat_cell_screen_offset"
         android:layout_marginEnd="@dimen/chat_cell_screen_offset"
         android:hint="@string/message"

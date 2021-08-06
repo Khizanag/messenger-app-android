@@ -31,7 +31,7 @@
                 android:layout_height="@dimen/text_fields_height"
                 android:layout_marginStart="@dimen/main_page_search_box_screen_offsets"
                 android:layout_marginEnd="@dimen/main_page_search_box_screen_offsets"
-                android:background="@drawable/text_fields_shape"
+                android:background="@drawable/rounded"
                 android:hint="@string/search"
                 android:inputType="textPersonName"
                 android:paddingHorizontal="@dimen/main_page_search_box_horizontal_padding"

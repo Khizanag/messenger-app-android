@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MessengerApp">
-        <activity android:name=".chat"></activity>
+        <activity android:name=".ChatActivity"></activity>
         <activity android:name=".UsersSearchActivity" />
         <activity android:name=".homepage.HomePageActivity" />
         <activity android:name=".signin.SignUpActivity" />

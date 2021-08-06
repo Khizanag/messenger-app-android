@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.constants.Constants.Companion.PICK_IMAGE
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants.Companion.PICK_IMAGE
 import mariamormotsadze.gigakhizanishvili.messengerapp.homepage.HomePageActivity
 
 class SignUpActivity : AppCompatActivity() {
