@@ -7,12 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     override fun onCreateView(
@@ -24,9 +18,5 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    private fun init(){
-
-    }
-
-
+    private fun init(){}
 }

@@ -9,8 +9,8 @@ import android.util.Log
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants.Companion.PICK_IMAGE
 import mariamormotsadze.gigakhizanishvili.messengerapp.homepage.HomePageActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -30,8 +30,8 @@ class SignUpActivity : AppCompatActivity() {
             val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
             val profession = activitySignUpBinding.whatIDo.text.toString()
             val isValid = validateInput(nickname, password, profession)
-            if(isValid){
-                val intent = Intent(this, HomePageActivity::class .java)
+            if (isValid){
+                val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -40,8 +40,7 @@ class SignUpActivity : AppCompatActivity() {
             Log.i("SignupPage", "avatar pressed")
 
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, PICK_IMAGE)
-
+            startActivityForResult(gallery, Constants.PICK_IMAGE)
         }
     }
 
@@ -52,7 +51,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(nickname: String, password: String, profession: String): Boolean{
+    private fun validateInput(nickname: String, password: String, profession: String): Boolean {
         when {
             nickname.isEmpty() -> {
                 Toast.makeText(this, R.string.empty_nickname_error, Toast.LENGTH_SHORT).show()

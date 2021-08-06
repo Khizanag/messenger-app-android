@@ -17,23 +17,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
-        Log.i("LoginPage", "here??")
+        Log.i("LoginPage", "onCreate after set content view, before setListeners")
         setListeners()
     }
 
     private fun setListeners(){
+        setSignInButtonListener()
+        setLoginPageSignUpButtonListener()
+    }
+
+    private fun setSignInButtonListener() {
         activityMainBinding.signInButton.setOnClickListener{
             Log.i("LoginPage", "sign in button clicked")
             val nickname = activityMainBinding.loginNicknameTextField.text.toString()
             val password = activityMainBinding.loginPasswordTextField.text.toString()
             validateInput(nickname, password)
 
-                val intent = Intent(this, ChatActivity::class .java)
-                startActivity(intent)
+            val intent = Intent(this, ChatActivity::class .java)
+            startActivity(intent)
 
             Log.i("LoginPage", "nickname is $nickname and password is $password ")
         }
+    }
 
+    private fun setLoginPageSignUpButtonListener() {
         activityMainBinding.loginPageSignUpButton.setOnClickListener {
             Log.i("LoginPage", "signup button clicked")
             val intent = Intent(this, SignUpActivity::class.java)
