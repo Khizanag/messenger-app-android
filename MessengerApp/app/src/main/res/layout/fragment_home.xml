@@ -48,7 +48,8 @@
                     android:alpha=".7"
                     android:autofillHints=""
                     android:drawableStart="@android:drawable/ic_menu_search"
-                    android:paddingStart="@dimen/main_page_magnifier_start_margin" />
+                    android:paddingStart="@dimen/main_page_magnifier_start_margin"
+                    android:layout_marginBottom="16dp"/>
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
