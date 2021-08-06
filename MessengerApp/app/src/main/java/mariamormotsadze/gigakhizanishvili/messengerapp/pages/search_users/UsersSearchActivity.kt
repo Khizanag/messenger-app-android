@@ -1,10 +1,9 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp
+package mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySearchUsersBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.fragments.HomeFragment
 
 class UsersSearchActivity : AppCompatActivity() {
 

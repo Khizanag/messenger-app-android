@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MessengerApp">
-        <activity android:name=".ChatActivity"></activity>
-        <activity android:name=".UsersSearchActivity" />
-        <activity android:name=".home_page.HomePageActivity" />
-        <activity android:name=".sign_in.SignUpActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat.ChatActivity"></activity>
+        <activity android:name="mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity" />
+        <activity android:name="mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity" />
+        <activity android:name="mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignUpActivity" />
+        <activity android:name="mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

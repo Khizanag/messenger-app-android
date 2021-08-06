@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.usecases
+package mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases
 
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
 

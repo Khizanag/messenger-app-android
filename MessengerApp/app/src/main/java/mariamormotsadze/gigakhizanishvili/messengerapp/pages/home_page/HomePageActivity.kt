@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.home_page
+package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.fragments.HomeFragment
-import mariamormotsadze.gigakhizanishvili.messengerapp.fragments.SettingsFragment
-import mariamormotsadze.gigakhizanishvili.messengerapp.UsersSearchActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.HomeFragment
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.SettingsFragment
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
 
 class HomePageActivity : AppCompatActivity() {
 

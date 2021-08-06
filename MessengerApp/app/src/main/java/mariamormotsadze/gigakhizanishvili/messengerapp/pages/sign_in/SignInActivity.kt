@@ -1,15 +1,16 @@
 
-package mariamormotsadze.gigakhizanishvili.messengerapp
+package mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat.ChatActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.sign_in.SignUpActivity
 
-class MainActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
 
