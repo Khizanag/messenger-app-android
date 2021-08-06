@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.homepage
+package mariamormotsadze.gigakhizanishvili.messengerapp.home_page
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

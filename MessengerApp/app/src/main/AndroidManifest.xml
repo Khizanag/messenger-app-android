@@ -11,8 +11,8 @@
         android:theme="@style/Theme.MessengerApp">
         <activity android:name=".ChatActivity"></activity>
         <activity android:name=".UsersSearchActivity" />
-        <activity android:name=".homepage.HomePageActivity" />
-        <activity android:name=".signin.SignUpActivity" />
+        <activity android:name=".home_page.HomePageActivity" />
+        <activity android:name=".sign_in.SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

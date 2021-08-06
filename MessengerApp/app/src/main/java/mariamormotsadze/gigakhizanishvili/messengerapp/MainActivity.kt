@@ -7,18 +7,25 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.signin.SignUpActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.sign_in.SignUpActivity
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var activityMainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setup()
+    }
+
+    private fun setup() {
+        setupBinding()
+        setListeners()
+    }
+
+    private fun setupBinding() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
-        Log.i("LoginPage", "onCreate after set content view, before setListeners")
-        setListeners()
     }
 
     private fun setListeners(){
@@ -31,28 +38,49 @@ class MainActivity : AppCompatActivity() {
             Log.i("LoginPage", "sign in button clicked")
             val nickname = activityMainBinding.loginNicknameTextField.text.toString()
             val password = activityMainBinding.loginPasswordTextField.text.toString()
-            validateInput(nickname, password)
 
-            val intent = Intent(this, ChatActivity::class .java)
-            startActivity(intent)
+            if (isInputValidated(nickname, password)) {
+                val intent = Intent(this, ChatActivity::class .java)
+                startActivity(intent)
 
-            Log.i("LoginPage", "nickname is $nickname and password is $password ")
+                Log.i("LoginPage", "nickname is $nickname and password is $password ")
+            }
+
         }
+    }
+
+    // checks if input(nickname, password) are entered correctly
+    private fun isInputValidated(nickname: String, password: String): Boolean {
+        if(nickname.isEmpty()) {
+            displayMessage(R.string.empty_nickname_error)
+            return false
+        } else if(password.isEmpty()) {
+            displayMessage(R.string.empty_password_error)
+            return false
+        }
+
+
+
+        return true
+    }
+
+    private fun displayMessage(messageResourceId: Int) {
+        Toast.makeText(this, messageResourceId, Toast.LENGTH_SHORT).show()
     }
 
     private fun setLoginPageSignUpButtonListener() {
         activityMainBinding.loginPageSignUpButton.setOnClickListener {
             Log.i("LoginPage", "signup button clicked")
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            openSignUpPage()
         }
     }
 
+    private fun openSignUpPage() {
+        val intent = Intent(this, SignUpActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun validateInput(nickname: String, password: String){
-        if(nickname.isEmpty()){
-            Toast.makeText(this, R.string.empty_nickname_error, Toast.LENGTH_SHORT).show()
-        } else if(password.isEmpty()){
-            Toast.makeText(this, R.string.empty_password_error, Toast.LENGTH_SHORT).show()
-        }
+
     }
 }

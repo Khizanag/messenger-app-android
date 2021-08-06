@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.signin
+package mariamormotsadze.gigakhizanishvili.messengerapp.sign_in
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.homepage.HomePageActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 
 class SignUpActivity : AppCompatActivity() {
