@@ -33,5 +33,6 @@
     <string name="empty_nickname_error">Please Enter Nickname</string>
     <string name="empty_password_error">Please Enter Password</string>
     <string name="empty_profession_error">Please Enter Profession</string>
+    <string name="sign_up_error">Error during registration: This nickname is already used.</string>
 
 </resources>

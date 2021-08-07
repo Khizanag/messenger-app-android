@@ -11,7 +11,7 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.LoginUseCase
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignInUseCase
 import java.io.Serializable
 
 class SignInActivity : AppCompatActivity() {
@@ -46,7 +46,7 @@ class SignInActivity : AppCompatActivity() {
             Log.i("LoginPage", "nickname is $nickname and password is $password ")
 
             if (isInputValidated(nickname, password)) {
-                val loggedInUser = LoginUseCase.login(nickname, password)
+                val loggedInUser = SignInUseCase.signIn(nickname, password)
                 if(loggedInUser != null) {
                     openHomePage(loggedInUser)
                 }

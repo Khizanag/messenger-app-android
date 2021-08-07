@@ -9,8 +9,9 @@ import android.util.Log
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignInUseCase
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignUpUseCase
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -18,29 +19,42 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
-        activitySignUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
-        setContentView(activitySignUpBinding.root)
-        setListeners()
+        setup()
     }
 
-    private fun setListeners(){
-        activitySignUpBinding.signUpButton.setOnClickListener {
-            val nickname = activitySignUpBinding.signUpNicknameTextField.text.toString()
-            val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
-            val profession = activitySignUpBinding.whatIDo.text.toString()
-            val isValid = validateInput(nickname, password, profession)
-            if (isValid){
-                val intent = Intent(this, HomePageActivity::class.java)
-                startActivity(intent)
-            }
-        }
+    private fun setup() {
+        setupBinding()
+        setupAvatar()
+        setupSignUpButton()
+    }
 
+    // should happen firstly: before doing other things
+    private fun setupBinding() {
+        activitySignUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(activitySignUpBinding.root)
+    }
+
+    private fun setupAvatar() {
         activitySignUpBinding.signUpAvatar.setOnClickListener(){
             Log.i("SignupPage", "avatar pressed")
 
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, Constants.PICK_IMAGE)
+        }
+    }
+
+    private fun setupSignUpButton() {
+        activitySignUpBinding.signUpButton.setOnClickListener {
+            val nickname = activitySignUpBinding.signUpNicknameTextField.text.toString()
+            val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
+            val profession = activitySignUpBinding.whatIDo.text.toString()
+            if (isValidInput(nickname, password, profession)){
+                if(SignUpUseCase.signUp(nickname, password, profession)) {
+                    SignInUseCase.signIn(nickname, password)
+                } else {
+                    showMessage(R.string.sign_up_error)
+                }
+            }
         }
     }
 
@@ -51,22 +65,17 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(nickname: String, password: String, profession: String): Boolean {
+    private fun isValidInput(nickname: String, password: String, profession: String): Boolean {
         when {
-            nickname.isEmpty() -> {
-                Toast.makeText(this, R.string.empty_nickname_error, Toast.LENGTH_SHORT).show()
-                return false
-            }
-            password.isEmpty() -> {
-                Toast.makeText(this, R.string.empty_password_error, Toast.LENGTH_SHORT).show()
-                return false
-            }
-            profession.isEmpty() -> {
-                Toast.makeText(this, R.string.empty_profession_error, Toast.LENGTH_SHORT).show()
-                return false
-            }
+            nickname.isEmpty() -> { showMessage(R.string.empty_nickname_error); return false }
+            password.isEmpty() -> { showMessage(R.string.empty_password_error); return false  }
+            profession.isEmpty() -> { showMessage(R.string.empty_profession_error); return false  }
         }
 
         return true
+    }
+
+    private fun showMessage(messageId: Int) {
+        Toast.makeText(this, R.string.empty_profession_error, Toast.LENGTH_SHORT).show()
     }
 }
