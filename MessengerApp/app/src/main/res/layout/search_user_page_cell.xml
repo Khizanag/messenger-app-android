@@ -7,7 +7,7 @@
 
     <!-- avatar -->
     <ImageView
-        android:id="@+id/search_page_avatar"
+        android:id="@+id/avatar_image_view"
         android:layout_width="@dimen/main_page_avatar_width"
         android:layout_height="@dimen/main_page_avatar_height"
         android:layout_marginTop="@dimen/main_page_avatar_top_margin"
@@ -19,26 +19,26 @@
 
     <!-- person name -->
     <TextView
-        android:id="@+id/person_name"
+        android:id="@+id/nickname_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/main_page_person_name_text_size"
         android:textColor="@color/main_page_person_name_color"
         android:layout_marginStart="@dimen/main_page_person_name_start_margin"
-        app:layout_constraintStart_toEndOf="@+id/search_page_avatar"
-        app:layout_constraintTop_toTopOf="@+id/search_page_avatar"
+        app:layout_constraintStart_toEndOf="@+id/avatar_image_view"
+        app:layout_constraintTop_toTopOf="@+id/avatar_image_view"
         tools:text="@string/person_name_template" />
 
     <!-- profession -->
     <TextView
-        android:id="@+id/profession"
+        android:id="@+id/profession_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/profession_top_margin"
         android:textColor="@color/main_page_message_preview_color"
         android:textSize="@dimen/main_page_message_preview_text_size"
-        app:layout_constraintStart_toStartOf="@+id/person_name"
-        app:layout_constraintTop_toBottomOf="@+id/person_name"
+        app:layout_constraintStart_toStartOf="@+id/nickname_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_text_view"
         tools:text="@string/profession" />
 
 

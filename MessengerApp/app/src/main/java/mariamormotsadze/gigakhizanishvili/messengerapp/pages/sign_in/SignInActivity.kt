@@ -57,6 +57,8 @@ class SignInActivity : AppCompatActivity() {
             val nickname = activityMainBinding.loginNicknameTextField.text.toString()
             val password = activityMainBinding.loginPasswordTextField.text.toString()
 
+            Log.i("`login`", "nickname: $nickname, password: $password")
+
             if (isInputValid(nickname, password)) {
                 val loggedInUser = SignInUseCase.signIn(nickname, password)
                 if(loggedInUser != null) {
@@ -91,13 +93,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun openHomePage(user: UserModel) {
+        Log.i("`login`", "openHomePage: user's nickname: ${user.nickname} ")
         val intent = Intent(this, HomePageActivity::class.java)
         intent.putExtra(ExtraKeys.LOGGED_IN_USER, user as Serializable)
         startActivity(intent)
-//        reset()
     }
 
-    private fun reset() {
-        setupTextFields()
-    }
 }

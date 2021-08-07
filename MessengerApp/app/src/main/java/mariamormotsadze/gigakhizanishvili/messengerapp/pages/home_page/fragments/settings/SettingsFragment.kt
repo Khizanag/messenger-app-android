@@ -51,6 +51,7 @@ class SettingsFragment(
         profilePhotoView = view.findViewById(R.id.sign_up_avatar)
         Glide.with(view.context)
             .load(model.imageUrl)
+            .placeholder(R.drawable.avatar_image_placeholder)
             .into(profilePhotoView)
     }
 

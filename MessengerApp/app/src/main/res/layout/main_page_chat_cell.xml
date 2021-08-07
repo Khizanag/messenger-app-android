@@ -19,7 +19,7 @@
 
     <!-- person name -->
     <TextView
-        android:id="@+id/person_name"
+        android:id="@+id/nickname_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/main_page_person_name_text_size"
@@ -37,8 +37,8 @@
         android:layout_marginTop="@dimen/main_page_message_preview_top_margin"
         android:textSize="@dimen/main_page_message_preview_text_size"
         android:textColor="@color/main_page_message_preview_color"
-        app:layout_constraintStart_toStartOf="@+id/person_name"
-        app:layout_constraintTop_toBottomOf="@+id/person_name"
+        app:layout_constraintStart_toStartOf="@+id/nickname_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_text_view"
         tools:text="@string/message_preview_template" />
 
     <!-- message delivery time -->
@@ -50,7 +50,7 @@
         android:layout_marginEnd="@dimen/main_page_delivery_time_end_margin"
         android:textColor="@color/main_page_delivery_time_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/person_name"
+        app:layout_constraintTop_toTopOf="@+id/nickname_text_view"
         tools:text="5m" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,11 +15,10 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignInActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
-import java.io.Serializable
 
 class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterface {
 
-    private lateinit var activityHomeBiding: ActivityHomePageBinding
+    private lateinit var activityHomeBinding: ActivityHomePageBinding
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var model: UserModel
 
@@ -32,8 +31,7 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
     private fun setup(savedInstanceState: Bundle?) {
         setupBinding()
         setupLoggedInUser()
-        initNavigationView()
-
+        setupNavigationView()
         setupBottomTabBar()
     }
 
@@ -43,12 +41,13 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
     }
 
     private fun setupBinding() {
-        activityHomeBiding = ActivityHomePageBinding.inflate(layoutInflater)
-        setContentView(activityHomeBiding.root)
+        activityHomeBinding = ActivityHomePageBinding.inflate(layoutInflater)
+        setContentView(activityHomeBinding.root)
+//        activityHomeBinding.
     }
 
-    private fun initNavigationView(){
-        bottomNavigationView = activityHomeBiding.bottomNavigationView
+    private fun setupNavigationView(){
+        bottomNavigationView = activityHomeBinding.bottomNavigationView
         bottomNavigationView.background = null
     }
 
@@ -69,7 +68,7 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
     }
 
     private fun setupFab() {
-        val fab = activityHomeBiding.searchUsersFloatingButton
+        val fab = activityHomeBinding.searchUsersFloatingButton
         fab.setOnClickListener{
             Log.i("Home Fragment", "FAB CLICKED")
             val intent = Intent(this, UsersSearchActivity::class.java)

@@ -1,6 +1,7 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases
 
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
