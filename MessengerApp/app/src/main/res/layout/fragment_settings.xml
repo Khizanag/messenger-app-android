@@ -8,8 +8,8 @@
     tools:context=".fragments.SettingsFragment">
 
     <!-- avatar -->
-    <ImageView
-        android:id="@+id/sign_up_avatar"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_avatar"
         android:layout_width="@dimen/avatar_width"
         android:layout_height="@dimen/avatar_height"
         android:layout_marginTop="@dimen/avatar_top_offset"
@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar_image_placeholder" />
+        android:src="@drawable/avatar_image_placeholder" />
 
     <!-- nickname text field -->
     <EditText
@@ -29,14 +29,15 @@
         android:layout_marginTop="@dimen/avatar_bottom_offset"
         android:ems="10"
         android:inputType="textPersonName"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:background="@drawable/text_fields_shape"
         android:textSize="@dimen/text_fields_text_size"
         android:autofillHints=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_avatar"
+        app:layout_constraintTop_toBottomOf="@+id/user_avatar"
         tools:ignore="LabelFor" />
+
 
     <!-- profession text field -->
     <EditText
@@ -48,7 +49,7 @@
         android:layout_marginTop="@dimen/password_text_field_top_offset"
         android:ems="10"
         android:inputType="textPersonName"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:background="@drawable/text_fields_shape"
         android:textSize="@dimen/text_fields_text_size"
         android:autofillHints=""
