@@ -40,13 +40,18 @@ class FoundUsersAdapter(private val initialData: List<FoundUserModel>): Recycler
                 .load(item.imageUrl)
                 .placeholder(R.drawable.avatar_image_placeholder)
                 .into(profilePhotoView)
-            nicknameTextView.setText(item.nickname)
-            professionTextView.setText(item.profession)
+            nicknameTextView.text = item.nickname
+            professionTextView.text = item.profession
 
             setOnClickListener {
                 // TODO: Handle on click
                 Log.i("`", "Clicked on what????")
+                startNewConversationWith()
             }
+        }
+
+        private fun startNewConversationWith() {
+
         }
     }
 }
