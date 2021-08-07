@@ -50,7 +50,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun setupSignUpButton() {
         activitySignUpBinding.signUpButton.setOnClickListener {
-            val nickname = activitySignUpBinding.signUpNicknameTextField.text.toString()
+            val nickname = activitySignUpBinding.nicknameTextView.text.toString()
             val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
             val profession = activitySignUpBinding.whatIDo.text.toString()
             if (isInputValid(nickname, password, profession)){

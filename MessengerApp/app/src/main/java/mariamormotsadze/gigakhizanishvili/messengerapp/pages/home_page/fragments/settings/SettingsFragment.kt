@@ -1,7 +1,10 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +12,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
-import java.io.Serializable
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 
 class SettingsFragment(
     private val controller: SettingsFragmentControllerInterface,
@@ -32,7 +32,24 @@ class SettingsFragment(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        val view: View =  inflater.inflate(R.layout.fragment_settings, container, false)
+        profilePhotoView = view.findViewById<View>(R.id.user_avatar) as ImageView
+
+        profilePhotoView.setOnClickListener(){
+            Log.i("Setting Page", "avatar pressed")
+
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, Constants.PICK_IMAGE)
+        }
+
+        return view
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && requestCode == 100){
+            profilePhotoView.setImageURI((data!!.data))
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,20 +65,20 @@ class SettingsFragment(
         setupSignOutButton(view, savedInstanceState)
     }
     private fun setupProfilePhoto(view: View, savedInstanceState: Bundle?) {
-        profilePhotoView = view.findViewById(R.id.sign_up_avatar)
-        Glide.with(view.context)
-            .load(model.imageUrl)
-            .placeholder(R.drawable.avatar_image_placeholder)
-            .into(profilePhotoView)
+        profilePhotoView = view.findViewById(R.id.user_avatar)
+//        Glide.with(view.context)
+//            .load(model.imageUrl)
+//            .placeholder(R.drawable.avatar_image_placeholder)
+//            .into(profilePhotoView)
     }
 
     private fun setupNicknameField(view: View, savedInstanceState: Bundle?) {
-        nicknameTextField = view.findViewById(R.id.sign_up_nickname_text_field)
+        nicknameTextField = view.findViewById(R.id.nickname_text_view)
         nicknameTextField.setText(model.nickname)
     }
 
     private fun setupProfessionTextField(view: View, savedInstanceState: Bundle?) {
-        professionTextField = view.findViewById(R.id.profession_text_field)
+        professionTextField = view.findViewById(R.id.profession_text_view)
         professionTextField.setText(model.profession)
     }
 

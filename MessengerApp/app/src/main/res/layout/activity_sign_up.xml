@@ -20,7 +20,7 @@
 
     <!-- nickname text field -->
     <EditText
-        android:id="@+id/sign_up_nickname_text_field"
+        android:id="@+id/nickname_text_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/text_fields_height"
         android:layout_marginStart="@dimen/text_fields_margins"
@@ -54,7 +54,7 @@
         android:ems="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_nickname_text_field"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_text_view"
         tools:ignore="TextFields" />
 
     <!-- what i do text field -->
