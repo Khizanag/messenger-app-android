@@ -8,5 +8,5 @@
     <dimen name="message_time_offset_from_cell">24dp</dimen>
     <dimen name="message_time_text_size">12sp</dimen>
     <dimen name="message_text_field_top_offset">16dp</dimen>
-    <dimen name="message_text_field_text_size">18dp</dimen>
+    <dimen name="message_text_field_text_size">18sp</dimen>
 </resources>

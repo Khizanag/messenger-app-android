@@ -10,20 +10,7 @@
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-            <ImageView
-                app:layout_collapseMode="parallax"
-                android:id="@+id/app_bar_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/background"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/todo" />
-
+        
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +52,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.appcompat.widget.Toolbar>
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -78,6 +64,37 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/my_message_cell" />
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/message_text_view"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/chat_cell_screen_offset"
+                android:layout_marginTop="@dimen/message_text_field_top_offset"
+                android:layout_marginEnd="@dimen/chat_cell_screen_offset"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded"
+                android:gravity="center_vertical"
+                android:hint="@string/message"
+                android:padding="@dimen/chat_cell_padding"
+                android:textColor="@color/message_text_color"
+                android:textSize="@dimen/message_text_field_text_size"
+                app:drawableEndCompat="@drawable/ic_send"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
 
 
