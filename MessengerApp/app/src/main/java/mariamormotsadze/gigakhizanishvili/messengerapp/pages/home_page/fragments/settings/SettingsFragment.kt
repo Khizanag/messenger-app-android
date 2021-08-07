@@ -1,5 +1,6 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments
+package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,9 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
+import java.io.Serializable
 
 class SettingsFragment(
     private val controller: SettingsFragmentControllerInterface,
@@ -95,5 +99,6 @@ class SettingsFragment(
 
     private fun setupSignOutButton(view: View, savedInstanceState: Bundle?) {
         signOutButton = view.findViewById(R.id.sign_out_button)
+        signOutButton.setOnClickListener { controller.signOut() }
     }
 }

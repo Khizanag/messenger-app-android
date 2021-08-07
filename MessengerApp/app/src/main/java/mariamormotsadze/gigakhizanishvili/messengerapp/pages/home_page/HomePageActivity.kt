@@ -9,11 +9,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.HomeFragment
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.SettingsFragment
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.SettingsFragmentControllerInterface
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home.HomeFragment
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings.SettingsFragment
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings.SettingsFragmentControllerInterface
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignInActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
+import java.io.Serializable
 
 class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterface {
 
@@ -86,6 +88,13 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
 
     override fun updateUser(newModel: UserModel) {
         model = newModel
+    }
+
+    override fun signOut() {
+        val intent = Intent(this, SignInActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.removeExtra(ExtraKeys.LOGGED_IN_USER)
+        startActivity(intent)
     }
 }
 

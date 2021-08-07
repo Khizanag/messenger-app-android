@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments
+package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

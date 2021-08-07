@@ -8,10 +8,14 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignInUseCase
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignUpUseCase
+import java.io.Serializable
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -40,6 +44,7 @@ class SignUpActivity : AppCompatActivity() {
 
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, Constants.PICK_IMAGE)
+            // TODO save chosen image
         }
     }
 
@@ -48,9 +53,12 @@ class SignUpActivity : AppCompatActivity() {
             val nickname = activitySignUpBinding.signUpNicknameTextField.text.toString()
             val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
             val profession = activitySignUpBinding.whatIDo.text.toString()
-            if (isValidInput(nickname, password, profession)){
+            if (isInputValid(nickname, password, profession)){
                 if(SignUpUseCase.signUp(nickname, password, profession)) {
-                    SignInUseCase.signIn(nickname, password)
+                    val loggedInUser = SignInUseCase.signIn(nickname, password)
+                    if(loggedInUser != null) {
+                        openHomePage(loggedInUser)
+                    }
                 } else {
                     showMessage(R.string.sign_up_error)
                 }
@@ -65,7 +73,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValidInput(nickname: String, password: String, profession: String): Boolean {
+    private fun isInputValid(nickname: String, password: String, profession: String): Boolean {
         when {
             nickname.isEmpty() -> { showMessage(R.string.empty_nickname_error); return false }
             password.isEmpty() -> { showMessage(R.string.empty_password_error); return false  }
@@ -77,5 +85,11 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun showMessage(messageId: Int) {
         Toast.makeText(this, R.string.empty_profession_error, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun openHomePage(user: UserModel) {
+        val intent = Intent(this, HomePageActivity::class.java)
+        intent.putExtra(ExtraKeys.LOGGED_IN_USER, user as Serializable)
+        startActivity(intent)
     }
 }

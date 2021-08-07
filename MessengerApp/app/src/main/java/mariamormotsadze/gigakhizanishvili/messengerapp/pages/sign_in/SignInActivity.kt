@@ -25,7 +25,26 @@ class SignInActivity : AppCompatActivity() {
 
     private fun setup() {
         setupBinding()
-        setListeners()
+        setupTextFields()
+        setupButtons()
+    }
+
+    private fun setupTextFields() {
+        setupNicknameTextField()
+        setupPasswordTextField()
+    }
+
+    private fun setupButtons() {
+        setupSignInButton()
+        setupSignUpButton()
+    }
+
+    private fun setupNicknameTextField() {
+        activityMainBinding.loginNicknameTextField.setText("")
+    }
+
+    private fun setupPasswordTextField() {
+        activityMainBinding.loginPasswordTextField.setText("")
     }
 
     private fun setupBinding() {
@@ -33,19 +52,12 @@ class SignInActivity : AppCompatActivity() {
         setContentView(activityMainBinding.root)
     }
 
-    private fun setListeners(){
-        setSignInButtonListener()
-        setLoginPageSignUpButtonListener()
-    }
-
-    private fun setSignInButtonListener() {
+    private fun setupSignInButton() {
         activityMainBinding.signInButton.setOnClickListener{
-            Log.i("LoginPage", "sign in button clicked")
             val nickname = activityMainBinding.loginNicknameTextField.text.toString()
             val password = activityMainBinding.loginPasswordTextField.text.toString()
-            Log.i("LoginPage", "nickname is $nickname and password is $password ")
 
-            if (isInputValidated(nickname, password)) {
+            if (isInputValid(nickname, password)) {
                 val loggedInUser = SignInUseCase.signIn(nickname, password)
                 if(loggedInUser != null) {
                     openHomePage(loggedInUser)
@@ -55,22 +67,19 @@ class SignInActivity : AppCompatActivity() {
     }
 
     // checks if input(nickname, password) are entered correctly
-    private fun isInputValidated(nickname: String, password: String): Boolean {
-        if(nickname.isEmpty()) {
-            displayMessage(R.string.empty_nickname_error)
-            return false
-        } else if(password.isEmpty()) {
-            displayMessage(R.string.empty_password_error)
-            return false
+    private fun isInputValid(nickname: String, password: String): Boolean {
+        when {
+            nickname.isEmpty() -> { showMessage(R.string.empty_nickname_error); return false }
+            password.isEmpty() -> { showMessage(R.string.empty_password_error); return false }
         }
         return true
     }
 
-    private fun displayMessage(messageResourceId: Int) {
+    private fun showMessage(messageResourceId: Int) {
         Toast.makeText(this, messageResourceId, Toast.LENGTH_SHORT).show()
     }
 
-    private fun setLoginPageSignUpButtonListener() {
+    private fun setupSignUpButton() {
         activityMainBinding.loginPageSignUpButton.setOnClickListener {
             openSignUpPage()
         }
@@ -85,5 +94,10 @@ class SignInActivity : AppCompatActivity() {
         val intent = Intent(this, HomePageActivity::class.java)
         intent.putExtra(ExtraKeys.LOGGED_IN_USER, user as Serializable)
         startActivity(intent)
+//        reset()
+    }
+
+    private fun reset() {
+        setupTextFields()
     }
 }
