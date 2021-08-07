@@ -2,13 +2,17 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat.ChatActivity
+import androidx.appcompat.app.AppCompatActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.LoginUseCase
+import java.io.Serializable
 
 class SignInActivity : AppCompatActivity() {
 
@@ -39,14 +43,14 @@ class SignInActivity : AppCompatActivity() {
             Log.i("LoginPage", "sign in button clicked")
             val nickname = activityMainBinding.loginNicknameTextField.text.toString()
             val password = activityMainBinding.loginPasswordTextField.text.toString()
+            Log.i("LoginPage", "nickname is $nickname and password is $password ")
 
             if (isInputValidated(nickname, password)) {
-                val intent = Intent(this, ChatActivity::class .java)
-                startActivity(intent)
-
-                Log.i("LoginPage", "nickname is $nickname and password is $password ")
+                val loggedInUser = LoginUseCase.login(nickname, password)
+                if(loggedInUser != null) {
+                    openHomePage(loggedInUser)
+                }
             }
-
         }
     }
 
@@ -59,9 +63,6 @@ class SignInActivity : AppCompatActivity() {
             displayMessage(R.string.empty_password_error)
             return false
         }
-
-
-
         return true
     }
 
@@ -71,7 +72,6 @@ class SignInActivity : AppCompatActivity() {
 
     private fun setLoginPageSignUpButtonListener() {
         activityMainBinding.loginPageSignUpButton.setOnClickListener {
-            Log.i("LoginPage", "signup button clicked")
             openSignUpPage()
         }
     }
@@ -81,7 +81,9 @@ class SignInActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun validateInput(nickname: String, password: String){
-
+    private fun openHomePage(user: UserModel) {
+        val intent = Intent(this, HomePageActivity::class.java)
+        intent.putExtra(ExtraKeys.LOGGED_IN_USER, user as Serializable)
+        startActivity(intent)
     }
 }

@@ -1,33 +1,43 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.HomeFragment
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.SettingsFragment
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.SettingsFragmentControllerInterface
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 
-class HomePageActivity : AppCompatActivity() {
+class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterface {
 
     private lateinit var activityHomeBiding: ActivityHomePageBinding
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var model: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
-        setup()
+        setup(savedInstanceState)
     }
 
-    private fun setup() {
+    private fun setup(savedInstanceState: Bundle?) {
         setupBinding()
+        setupLoggedInUser()
         initNavigationView()
 
         setupBottomTabBar()
+    }
+
+    private fun setupLoggedInUser() {
+        val extras = this.intent.extras!!
+        model = extras.getSerializable(ExtraKeys.LOGGED_IN_USER) as UserModel
     }
 
     private fun setupBinding() {
@@ -41,10 +51,10 @@ class HomePageActivity : AppCompatActivity() {
     }
 
     private fun setupBottomTabBar() {
-        val homeFragment = HomeFragment()
-        val settingsFragment = SettingsFragment()
-
         setupFab()
+
+        val homeFragment = HomeFragment()
+        val settingsFragment = SettingsFragment(this, model)
         makeCurrentFragment(homeFragment)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -70,6 +80,12 @@ class HomePageActivity : AppCompatActivity() {
             replace(R.id.frame_layout, fragment)
             commit()
         }
+    }
+
+    // ----------- SettingsFragmentControllerInterface ---------- //
+
+    override fun updateUser(newModel: UserModel) {
+        model = newModel
     }
 }
 

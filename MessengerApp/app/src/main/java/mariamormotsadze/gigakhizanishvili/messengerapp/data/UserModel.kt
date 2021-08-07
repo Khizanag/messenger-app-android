@@ -1,11 +1,12 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.data
 
-import android.media.Image
+import android.graphics.drawable.Drawable
+import java.io.Serializable
 
-data class UserModel(
+data class UserModel (
     val id: Int,
-    val fullName: String,
-    val email: String,
+    var nickname: String,
     val password: String,
-    val photo: Image,
-)
+    val imageUrl: String?,
+    var profession: String,
+): Serializable
