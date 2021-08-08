@@ -13,7 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 
 class SettingsFragment(

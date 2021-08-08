@@ -29,7 +29,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:src="@drawable/avatar_image_placeholder"
+                        android:src="@drawable/avatar_placeholder"
                         android:layout_marginEnd="16dp"/>
 
                     <TextView
@@ -75,7 +75,7 @@
 
             <TextView
                 android:id="@+id/message_text_view"
-                android:layout_width="@dimen/zero"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/chat_cell_screen_offset"
                 android:layout_marginTop="@dimen/message_text_field_top_offset"

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home.HomeFragment
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings.SettingsFragment

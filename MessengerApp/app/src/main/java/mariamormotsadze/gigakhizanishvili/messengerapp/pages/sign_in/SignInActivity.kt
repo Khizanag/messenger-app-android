@@ -7,9 +7,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat.ChatActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignInUseCase
 import java.io.Serializable
@@ -94,7 +94,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun openHomePage(user: UserModel) {
         Log.i("`login`", "openHomePage: user's nickname: ${user.nickname} ")
-        val intent = Intent(this, HomePageActivity::class.java)
+        val intent = Intent(this, ChatActivity::class.java)
         intent.putExtra(ExtraKeys.LOGGED_IN_USER, user as Serializable)
         startActivity(intent)
     }

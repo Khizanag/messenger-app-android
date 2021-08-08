@@ -15,7 +15,7 @@
         android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/avatar_image_placeholder" />
+        android:src="@drawable/avatar_placeholder" />
 
     <!-- person name -->
     <TextView

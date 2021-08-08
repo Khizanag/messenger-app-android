@@ -12,7 +12,7 @@
         android:layout_width="@dimen/avatar_width"
         android:layout_height="@dimen/avatar_height"
         android:layout_marginTop="@dimen/avatar_top_offset"
-        android:src="@drawable/avatar_image_placeholder"
+        android:src="@drawable/avatar_placeholder"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

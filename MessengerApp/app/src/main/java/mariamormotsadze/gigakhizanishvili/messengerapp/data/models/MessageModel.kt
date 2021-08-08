@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.data
+package mariamormotsadze.gigakhizanishvili.messengerapp.data.models
 
 import java.util.*
 

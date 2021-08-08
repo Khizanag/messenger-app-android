@@ -8,7 +8,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
