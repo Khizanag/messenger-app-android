@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
@@ -112,7 +114,7 @@ class SettingsFragment(
     }
 
     private fun updateRemoteUser() {
-        // TODO
+        Firebase.auth.signOut()
     }
 
     private fun setupSignOutButton(view: View, savedInstanceState: Bundle?) {

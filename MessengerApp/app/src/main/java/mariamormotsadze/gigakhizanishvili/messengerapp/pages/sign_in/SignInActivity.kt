@@ -27,6 +27,18 @@ class SignInActivity : AppCompatActivity() {
         setup()
     }
 
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+//            reload();
+            Log.i("`firebase`", "current user is NOT null")
+        } else {
+            Log.i("`firebase`", "current user is null")
+        }
+    }
+
     private fun setup() {
         setupBinding()
         setupFirebase()
@@ -109,27 +121,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
-        val customToken = ""
-        customToken?.let {
-            auth.signInWithCustomToken(it)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-//                        Log.d(TAG, "signInWithCustomToken:success")
-                        val user = auth.currentUser
-//                        user.
-//                        updateUI(user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-//                        Log.w(TAG, "signInWithCustomToken:failure", task.exception)
-                        Toast.makeText(
-                            baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-//                        updateUI(null)
-                    }
-                }
-        }
+        auth = Firebase.auth
+
     }
 
     private fun updateUI(user: String?) {

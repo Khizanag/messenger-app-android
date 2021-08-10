@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
@@ -39,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun setupAvatar() {
-        activitySignUpBinding.signUpAvatar.setOnClickListener(){
+        activitySignUpBinding.signUpAvatar.setOnClickListener() {
             Log.i("SignupPage", "avatar pressed")
 
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
@@ -53,17 +56,47 @@ class SignUpActivity : AppCompatActivity() {
             val nickname = activitySignUpBinding.nicknameTextView.text.toString()
             val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
             val profession = activitySignUpBinding.whatIDo.text.toString()
-            if (isInputValid(nickname, password, profession)){
-                if(SignUpUseCase.signUp(nickname, password, profession)) {
-                    val loggedInUser = SignInUseCase.signIn(nickname, password)
-                    if(loggedInUser != null) {
+            if (isInputValid(nickname, password, profession)) {
+                signUp(nickname, password)
+//                if (SignUpUseCase.signUp(nickname, password, profession)) {
+//                    val loggedInUser = SignInUseCase.signIn(nickname, password)
+//                    if (loggedInUser != null) {
+//                        openHomePage(loggedInUser)
+//                    }
+//                } else {
+//                    showMessage(R.string.sign_up_error)
+//                }
+            }
+        }
+    }
+
+    private fun signUp(nickname: String, password: String) {
+        val auth = Firebase.auth
+        Log.i("`firebase`", "$auth")
+        val email = "$nickname@gmail.com"
+        Log.i("`firebase`", "signing up with: $email and $password")
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("`firebase`s", "createUserWithEmail:success")
+                    val user = auth.currentUser
+                    user?.let {
+                        val loggedInUser = FirebaseManager.firebaseUserToUser(user)
                         openHomePage(loggedInUser)
                     }
+
                 } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("`firebase`", "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
                     showMessage(R.string.sign_up_error)
                 }
             }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
