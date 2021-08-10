@@ -1,9 +1,8 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users
 
 data class FoundUserModel(
-    val userId: Int,
-    val nickname: String,
-    val profession: String,
-    val imageUrl: String,
-
-    )
+    val userId: String? = null,
+    val nickname: String? = null,
+    val profession: String? = null,
+    val imageUrl: String? = null,
+)

@@ -1,12 +1,8 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.data.models
 
-import android.os.Message
-import java.util.*
-
-
 data class ChatModel (
-    val id: Int,
-    val firstUserId: Int,
-    val secondUserId: Int,
+    val id: String? = null,
+    val firstUserId: String? = null,
+    val secondUserId: String? = null,
     var messages: MutableList<MessageModel>,
 )

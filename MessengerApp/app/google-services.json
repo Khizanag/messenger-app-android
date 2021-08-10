@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "772190975296",
+    "firebase_url": "https://messenger-app-18f78-default-rtdb.firebaseio.com",
+    "project_id": "messenger-app-18f78",
+    "storage_bucket": "messenger-app-18f78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772190975296:android:9b3ec8945a277deceeb6a5",
+        "android_client_info": {
+          "package_name": "mariamormotsadze.gigakhizanishvili.messengerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772190975296-6m83f2j0h1jtianavuectm4hp47av48g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY-NkWd0BklHIlBpZdzg5XLFXgVM_ulBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772190975296-6m83f2j0h1jtianavuectm4hp47av48g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
