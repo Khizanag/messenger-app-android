@@ -6,7 +6,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home.HomeFragment
@@ -20,30 +23,33 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
 
     private lateinit var activityHomeBinding: ActivityHomePageBinding
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var model: UserModel
+    private lateinit var user: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_page)
         setup(savedInstanceState)
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        user = FirebaseManager.getSignedInUser()
+        Log.i("`firebase`", "user -> $user")
     }
 
     private fun setup(savedInstanceState: Bundle?) {
         setupBinding()
-        setupLoggedInUser()
+        setupSignedInUser()
         setupNavigationView()
         setupBottomTabBar()
-    }
-
-    private fun setupLoggedInUser() {
-        val extras = this.intent.extras!!
-        model = extras.getSerializable(ExtraKeys.LOGGED_IN_USER) as UserModel
     }
 
     private fun setupBinding() {
         activityHomeBinding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(activityHomeBinding.root)
-//        activityHomeBinding.
+    }
+
+    private fun setupSignedInUser() {
+        user = FirebaseManager.getSignedInUser()
     }
 
     private fun setupNavigationView(){
@@ -55,7 +61,7 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
         setupFab()
 
         val homeFragment = HomeFragment()
-        val settingsFragment = SettingsFragment(this, model)
+        val settingsFragment = SettingsFragment(this, user)
         makeCurrentFragment(homeFragment)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -86,13 +92,12 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
     // ----------- SettingsFragmentControllerInterface ---------- //
 
     override fun updateUser(newModel: UserModel) {
-        model = newModel
+        user = newModel
     }
 
     override fun signOut() {
+        Firebase.auth.signOut()
         val intent = Intent(this, SignInActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.removeExtra(ExtraKeys.LOGGED_IN_USER)
         startActivity(intent)
     }
 }

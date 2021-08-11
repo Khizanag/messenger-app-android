@@ -114,7 +114,7 @@ class SettingsFragment(
     }
 
     private fun updateRemoteUser() {
-        Firebase.auth.signOut()
+        // TODO
     }
 
     private fun setupSignOutButton(view: View, savedInstanceState: Bundle?) {

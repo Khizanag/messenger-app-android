@@ -72,28 +72,16 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUp(nickname: String, password: String) {
         val auth = Firebase.auth
-        Log.i("`firebase`", "$auth")
         val email = "$nickname@gmail.com"
-        Log.i("`firebase`", "signing up with: $email and $password")
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d("`firebase`s", "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    user?.let {
+                    auth.currentUser?.let { user ->
                         val loggedInUser = FirebaseManager.firebaseUserToUser(user)
                         openHomePage(loggedInUser)
                     }
-
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("`firebase`", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
                     showMessage(R.string.sign_up_error)
                 }
             }

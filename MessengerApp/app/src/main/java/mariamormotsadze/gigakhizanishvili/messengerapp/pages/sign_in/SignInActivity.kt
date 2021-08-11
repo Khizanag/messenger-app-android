@@ -10,9 +10,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat.ChatActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignInUseCase
 import java.io.Serializable
@@ -21,22 +23,11 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var user: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setup()
-    }
-
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-//            reload();
-            Log.i("`firebase`", "current user is NOT null")
-        } else {
-            Log.i("`firebase`", "current user is null")
-        }
     }
 
     private fun setup() {
@@ -81,11 +72,8 @@ class SignInActivity : AppCompatActivity() {
             Log.i("`login`", "nickname: $nickname, password: $password")
 
             if (isInputValid(nickname, password)) {
-                val loggedInUser = SignInUseCase.signIn(nickname, password)
-                if(loggedInUser != null) {
-                    openHomePage(loggedInUser)
-                }
-            }
+                signIn(nickname, password)
+            } // else is handled in isInputValid
         }
     }
 
@@ -113,19 +101,24 @@ class SignInActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun openHomePage(user: UserModel) {
-        Log.i("`login`", "openHomePage: user's nickname: ${user.nickname} ")
-        val intent = Intent(this, ChatActivity::class.java)
-        intent.putExtra(ExtraKeys.LOGGED_IN_USER, user as Serializable)
+    private fun openHomePage() {
+        val intent = Intent(this, HomePageActivity::class.java)
         startActivity(intent)
     }
 
-    private fun signIn() {
-        auth = Firebase.auth
-
-    }
-
-    private fun updateUI(user: String?) {
-        // TODO
+    private fun signIn(nickname: String, password: String) {
+        val email = "$nickname@gmail.com"
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    if (auth.currentUser != null) {
+                        openHomePage()
+                    } else {
+                        showMessage(R.string.sign_in_error)
+                    }
+                } else {
+                    showMessage(R.string.sign_in_error)
+                }
+            }
     }
 }

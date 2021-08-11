@@ -34,5 +34,6 @@
     <string name="empty_password_error">Please Enter Password</string>
     <string name="empty_profession_error">Please Enter Profession</string>
     <string name="sign_up_error">Error during registration: This nickname is already used.</string>
+    <string name="sign_in_error">Nickname or password was incorrect. Please try again.</string>
 
 </resources>
