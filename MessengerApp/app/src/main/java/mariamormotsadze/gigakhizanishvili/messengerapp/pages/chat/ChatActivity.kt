@@ -15,8 +15,4 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
     }
 
-    override fun onStart() {
-        super.onStart()
-        user = FirebaseManager.getSignedInUser()
-    }
 }

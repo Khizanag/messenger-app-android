@@ -3,14 +3,18 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserFactory
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserServiceModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home.HomeFragment
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page.ProfilePageFragment
@@ -26,18 +30,30 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setup(savedInstanceState)
+        runGetUserTask()
     }
 
-    public override fun onStart() {
-        super.onStart()
-        user = FirebaseManager.getSignedInUser()
-        Log.i("`firebase`", "user -> $user")
+    private fun runGetUserTask() {
+        val userRef = FirebaseManager.getSignedInUserReference()
+        val getUserTask = userRef.get()
+        getUserTask.addOnSuccessListener { userDataSnapshot ->
+            val serviceModel = userDataSnapshot.getValue<UserServiceModel>()
+            val userId = userDataSnapshot.key
+
+            if (userId == null || serviceModel == null) {
+                Log.i("`firebase`", "error during service model")
+                showMessage(R.string.connection_error)
+            } else {
+                Log.i("`firebase`", "NO error during getSignedInUserId ")
+                user = UserFactory.toModel(userId, serviceModel!!)
+                setup()
+            }
+        }
+        getUserTask.addOnFailureListener { showMessage(R.string.connection_error) }
     }
 
-    private fun setup(savedInstanceState: Bundle?) {
+    private fun setup() {
         setupBinding()
-        setupSignedInUser()
         setupNavigationView()
         setupBottomTabBar()
     }
@@ -48,7 +64,7 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
     }
 
     private fun setupSignedInUser() {
-        user = FirebaseManager.getSignedInUser()
+//        user = FirebaseManager.getSignedInUser()
     }
 
     private fun setupNavigationView(){
@@ -86,6 +102,10 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
             replace(R.id.frame_layout, fragment)
             commit()
         }
+    }
+
+    private fun showMessage(messageResourceId: Int) {
+        Toast.makeText(this, messageResourceId, Toast.LENGTH_SHORT).show()
     }
 
     // ----------- SettingsFragmentControllerInterface ---------- //
