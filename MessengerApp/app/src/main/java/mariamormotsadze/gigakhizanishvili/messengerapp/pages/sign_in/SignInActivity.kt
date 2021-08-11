@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
@@ -23,11 +24,24 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var user: UserModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setup()
+        if(isUserSignedIn()) {
+            openHomePage()
+        } else {
+            setup()
+        }
+
+        testFirebase()
+    }
+
+    private fun isUserSignedIn() = Firebase.auth.currentUser != null
+
+    private fun testFirebase() {
+        val database = Firebase.database
+        val myRef = database.getReference("message")
+        myRef.setValue("Hello, World!")
     }
 
     private fun setup() {
