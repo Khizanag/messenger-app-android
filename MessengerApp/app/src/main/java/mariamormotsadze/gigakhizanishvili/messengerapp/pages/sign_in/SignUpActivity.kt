@@ -1,24 +1,24 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in
 
 import android.app.Activity
+import android.app.Service
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserServiceModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignUpBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignInUseCase
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignUpUseCase
-import java.io.Serializable
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.DatabaseConstants
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignUpUseCase.signUp
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -57,34 +57,37 @@ class SignUpActivity : AppCompatActivity() {
             val password = activitySignUpBinding.signUpPasswordTextField.text.toString()
             val profession = activitySignUpBinding.whatIDo.text.toString()
             if (isInputValid(nickname, password, profession)) {
-                signUp(nickname, password)
-//                if (SignUpUseCase.signUp(nickname, password, profession)) {
-//                    val loggedInUser = SignInUseCase.signIn(nickname, password)
-//                    if (loggedInUser != null) {
-//                        openHomePage(loggedInUser)
-//                    }
-//                } else {
-//                    showMessage(R.string.sign_up_error)
-//                }
+                signUp(nickname, password, profession)
             }
         }
     }
 
-    private fun signUp(nickname: String, password: String) {
+    private fun signUp(nickname: String, password: String, profession: String) {
         val auth = Firebase.auth
         val email = "$nickname@gmail.com"
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d("`firebase`s", "createUserWithEmail:success")
-                    auth.currentUser?.let { user ->
-                        val loggedInUser = FirebaseManager.firebaseUserToUser(user)
-                        openHomePage(loggedInUser)
+                    auth.currentUser?.let { firebaseUser ->
+                        val userId = firebaseUser.uid
+                        val imageUrl = null // TODO
+                        val serviceUser = UserServiceModel(nickname, imageUrl, profession)
+                        insertUserIntoDatabase(serviceUser, firebaseUser.uid)
+                        openHomePage()
                     }
                 } else {
                     showMessage(R.string.sign_up_error)
                 }
             }
+    }
+
+    private fun insertUserIntoDatabase(user: UserServiceModel, userId: String) {
+        val database = Firebase.database
+        val usersRef = database.getReference(DatabaseConstants.USERS)
+        usersRef.push().key?.let {
+            usersRef.child(userId).setValue(user)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -108,9 +111,8 @@ class SignUpActivity : AppCompatActivity() {
         Toast.makeText(this, R.string.empty_profession_error, Toast.LENGTH_SHORT).show()
     }
 
-    private fun openHomePage(user: UserModel) {
+    private fun openHomePage() {
         val intent = Intent(this, HomePageActivity::class.java)
-        intent.putExtra(ExtraKeys.LOGGED_IN_USER, user as Serializable)
         startActivity(intent)
     }
 }

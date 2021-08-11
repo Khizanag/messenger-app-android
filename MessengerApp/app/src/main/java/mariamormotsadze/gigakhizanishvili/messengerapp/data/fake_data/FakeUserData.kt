@@ -1,7 +1,6 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.data.fake_data
 
-import android.content.Context
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.FoundUserModel
 
 object FakeUserData {
@@ -9,7 +8,6 @@ object FakeUserData {
     fun getUser1() = UserModel(
         "1",
         "ilia_chavchavadze",
-        "i",
         "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ilia_Tchavtchavadze.jpg/500px-Ilia_Tchavtchavadze.jpg",
         "jurist, poet, novelist, humanist, publisher, philosopher",
     )
@@ -17,15 +15,13 @@ object FakeUserData {
     fun getUser2() = UserModel(
         "2",
         "galaktion_tabidze",
-        "g",
         "https://upload.wikimedia.org/wikipedia/commons/e/e1/Galaktioni_1933.jpg",
-        "poet"
+        "poet",
     )
 
     fun getUser3() = UserModel(
         "3",
         "shota_rustaveli",
-        "s",
         "https://upload.wikimedia.org/wikipedia/commons/a/a4/Shota_rustaveli_qartuli.jpg",
         "poet, thinker, statesman, prince, treasurer"
     )
@@ -33,7 +29,6 @@ object FakeUserData {
     fun getUser4() = UserModel(
         "4",
         "vaja_pshavela",
-        "v",
         "https://burusi.files.wordpress.com/2010/03/e18395e18390e1839fe18390-e183a4e183a8e18390e18395e18394e1839ae18390-e28093-vazha-pshavela.jpg",
         "Poet, short-story writer"
     )
@@ -41,7 +36,6 @@ object FakeUserData {
     fun getUser5() = UserModel(
         "5",
         "akaki_tsereteli",
-        "a",
         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Georgian_poet_Akaki_Tsereteli%2C_c._early_1900s_in_Tbilisi%2C_full_image.jpg/500px-Georgian_poet_Akaki_Tsereteli%2C_c._early_1900s_in_Tbilisi%2C_full_image.jpg",
         "Poet"
     )

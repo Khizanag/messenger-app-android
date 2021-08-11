@@ -2,10 +2,9 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.fake_data.FakeUserData
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySearchUsersBinding
 
 class UsersSearchActivity : AppCompatActivity() {

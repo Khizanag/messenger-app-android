@@ -1,11 +1,13 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home
 
 import android.media.Image
+import com.google.firebase.database.IgnoreExtraProperties
 import java.util.*
 
 
 // this class supports each recycler view row on
 // home page's home fragment
+@IgnoreExtraProperties
 data class ChatRowModel(
     val id: String? = null,
     val secondPersonId: String? = null,

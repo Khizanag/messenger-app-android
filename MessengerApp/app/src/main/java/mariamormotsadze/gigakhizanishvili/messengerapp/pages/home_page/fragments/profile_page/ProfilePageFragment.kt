@@ -1,4 +1,4 @@
-package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings
+package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page
 
 import android.app.Activity
 import android.content.Intent
@@ -12,14 +12,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 
-class SettingsFragment(
-    private val controller: SettingsFragmentControllerInterface,
+class ProfilePageFragment(
+    private val controller: ProfilePageFragmentControllerInterface,
     private val model: UserModel,
 ) : Fragment() {
 
@@ -34,7 +32,7 @@ class SettingsFragment(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View =  inflater.inflate(R.layout.fragment_settings, container, false)
+        val view: View =  inflater.inflate(R.layout.fragment_profile_page, container, false)
         profilePhotoView = view.findViewById<View>(R.id.user_avatar) as ImageView
 
         profilePhotoView.setOnClickListener(){

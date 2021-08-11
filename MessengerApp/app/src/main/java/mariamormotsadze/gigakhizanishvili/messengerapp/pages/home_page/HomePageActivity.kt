@@ -10,16 +10,15 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home.HomeFragment
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings.SettingsFragment
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.settings.SettingsFragmentControllerInterface
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page.ProfilePageFragment
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page.ProfilePageFragmentControllerInterface
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignInActivity
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 
-class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterface {
+class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInterface {
 
     private lateinit var activityHomeBinding: ActivityHomePageBinding
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -61,7 +60,7 @@ class HomePageActivity : AppCompatActivity(), SettingsFragmentControllerInterfac
         setupFab()
 
         val homeFragment = HomeFragment()
-        val settingsFragment = SettingsFragment(this, user)
+        val settingsFragment = ProfilePageFragment(this, user)
         makeCurrentFragment(homeFragment)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {

@@ -11,14 +11,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat.ChatActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignInUseCase
-import java.io.Serializable
 
 class SignInActivity : AppCompatActivity() {
 
@@ -32,17 +26,9 @@ class SignInActivity : AppCompatActivity() {
         } else {
             setup()
         }
-
-        testFirebase()
     }
 
     private fun isUserSignedIn() = Firebase.auth.currentUser != null
-
-    private fun testFirebase() {
-        val database = Firebase.database
-        val myRef = database.getReference("message")
-        myRef.setValue("Hello, World!")
-    }
 
     private fun setup() {
         setupBinding()
