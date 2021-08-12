@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/their_message_cell"
-        android:layout_width="@dimen/zero"
+        android:id="@+id/message_cell"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/chat_cell_screen_offset"
         android:layout_marginTop="@dimen/chat_cell_screen_offset"
@@ -21,14 +21,14 @@
         android:padding="@dimen/chat_cell_padding"/>
 
     <TextView
-        android:id="@+id/their_message_time"
+        android:id="@+id/message_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/message_time_offset_from_cell"
         tools:text="5m"
-        app:layout_constraintBottom_toBottomOf="@+id/their_message_cell"
-        app:layout_constraintStart_toEndOf="@+id/their_message_cell"
-        app:layout_constraintTop_toTopOf="@+id/their_message_cell"
+        app:layout_constraintBottom_toBottomOf="@+id/message_cell"
+        app:layout_constraintStart_toEndOf="@+id/message_cell"
+        app:layout_constraintTop_toTopOf="@+id/message_cell"
         android:textSize="@dimen/message_time_text_size"
         android:textColor="@color/message_time_color"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

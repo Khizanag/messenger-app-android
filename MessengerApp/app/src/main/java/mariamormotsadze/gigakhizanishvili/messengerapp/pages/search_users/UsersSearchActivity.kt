@@ -2,6 +2,7 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.google.firebase.database.ktx.getValue
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
@@ -18,6 +19,7 @@ class UsersSearchActivity : AppCompatActivity() {
     private lateinit var activitySearchUsersBinding: ActivitySearchUsersBinding
     private lateinit var user: UserModel
     private lateinit var oldChats: HashMap<String, ChatServiceModel>
+    private lateinit var adapter: FoundUsersAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,14 @@ class UsersSearchActivity : AppCompatActivity() {
         setupBinding()
         setupUsersRecyclerView()
         setupBackButton()
+        setUpAdapter()
+    }
+
+    private fun setUpAdapter() {
+        Log.i("RAGACA", user.chats.toString())
+        adapter = FoundUsersAdapter(listOf(FoundUserModel("sakheli", "gvari", "profesia", "ki"),
+            FoundUserModel("sakheli2", "gvari2", "profesia2", "ki2  ")))
+        activitySearchUsersBinding.foundUsersRecyclerView.adapter = adapter
     }
 
     private fun setupUsersRecyclerView() {

@@ -20,7 +20,7 @@
         android:src="@drawable/avatar_placeholder" />
 
     <!-- nickname text field -->
-    <EditText
+    <TextView
         android:id="@+id/nickname_text_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/text_fields_height"
@@ -28,7 +28,6 @@
         android:layout_marginEnd="@dimen/text_fields_margins"
         android:layout_marginTop="@dimen/avatar_bottom_offset"
         android:ems="10"
-        android:inputType="textPersonName"
         android:gravity="center"
         android:background="@drawable/text_fields_shape"
         android:textSize="@dimen/text_fields_text_size"
@@ -36,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_avatar"
-        tools:ignore="LabelFor" />
+        tools:ignore="Deprecated,LabelFor" />
 
 
     <!-- profession text field -->

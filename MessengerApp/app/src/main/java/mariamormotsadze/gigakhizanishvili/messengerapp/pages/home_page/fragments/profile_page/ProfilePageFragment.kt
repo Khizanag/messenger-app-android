@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -26,7 +27,7 @@ class ProfilePageFragment(
 ) : Fragment() {
 
     private lateinit var profilePhotoView: ImageView
-    private lateinit var nicknameTextField: EditText
+    private lateinit var nicknameTextField: TextView
     private lateinit var professionTextField: EditText
     private lateinit var updateButton: Button
     private lateinit var signOutButton: Button
@@ -77,7 +78,7 @@ class ProfilePageFragment(
 
     private fun setupNicknameField(view: View, savedInstanceState: Bundle?) {
         nicknameTextField = view.findViewById(R.id.nickname_text_view)
-        nicknameTextField.setText(model.nickname)
+        nicknameTextField.text = model.nickname
     }
 
     private fun setupProfessionTextField(view: View, savedInstanceState: Bundle?) {

@@ -7,8 +7,8 @@
 
 
     <TextView
-        android:id="@+id/my_message_cell"
-        android:layout_width="@dimen/zero"
+        android:id="@+id/message_cell"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/chat_cell_screen_offset"
         android:layout_marginEnd="@dimen/chat_cell_screen_offset"
@@ -22,14 +22,14 @@
         tools:text="Hi"/>
 
     <TextView
-        android:id="@+id/my_message_time"
+        android:id="@+id/message_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/message_time_offset_from_cell"
         tools:text="5m"
-        app:layout_constraintBottom_toBottomOf="@+id/my_message_cell"
-        app:layout_constraintEnd_toStartOf="@+id/my_message_cell"
-        app:layout_constraintTop_toTopOf="@+id/my_message_cell"
+        app:layout_constraintBottom_toBottomOf="@+id/message_cell"
+        app:layout_constraintEnd_toStartOf="@+id/message_cell"
+        app:layout_constraintTop_toTopOf="@+id/message_cell"
         android:textSize="@dimen/message_time_text_size"
         android:textColor="@color/message_time_color"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+//        Firebase.auth.signOut()
         if(isUserSignedIn()) {
             openHomePage()
         } else {

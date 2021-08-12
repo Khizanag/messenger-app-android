@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="chat_cell_screen_offset">16dp</dimen>
-    <dimen name="chat_cell_text_size">24sp</dimen>
+    <dimen name="chat_cell_text_size">22sp</dimen>
     <dimen name="chat_cell_padding">16dp</dimen>
     <dimen name="chat_cell_corner_radius">40dp</dimen>
     <dimen name="message_time_offset_from_cell">24dp</dimen>
