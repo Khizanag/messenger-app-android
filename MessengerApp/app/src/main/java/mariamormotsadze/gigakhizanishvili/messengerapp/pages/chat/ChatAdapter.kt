@@ -44,11 +44,16 @@ class ChatAdapter(private var messages: List<MessageModel>): RecyclerView.Adapte
         Log.i("@@@@@ MESSAGES @@@@@ : ", messages.toString())
         Log.i("@@@@@ POSITION @@@@@ : ", position.toString())
         val message: MessageModel = messages[position]
-        Log.i("@@@@@ CHAT ADAPTER @@@@@ : ", message.toString())
+        Log.i("@@@@@ CHAT ADAPTER @@@@@ : ", message.toString()) // TODO: null ariso
         if(message.amISender)
             return SENT
 
         return RECEIVED
+    }
+
+    fun configure(newMessages: List<MessageModel>) {
+        messages = newMessages
+        notifyDataSetChanged()
     }
 
 }

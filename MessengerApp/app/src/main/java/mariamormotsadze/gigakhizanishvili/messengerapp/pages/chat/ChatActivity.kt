@@ -3,18 +3,22 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Message
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatServiceModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.message.MessageModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
@@ -25,9 +29,13 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 
 class ChatActivity : AppCompatActivity() {
 
-    private lateinit var messages: List<MessageModel>
+    private lateinit var messages: MutableList<MessageModel>
     private lateinit var otherUser: UserModel
     private val storageRef = FirebaseStorage.getInstance().reference
+
+    private lateinit var chatRef: DatabaseReference
+    private lateinit var myMessagesRef: DatabaseReference
+    private lateinit var otherUserMessagesRef: DatabaseReference
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ChatAdapter
@@ -52,29 +60,29 @@ class ChatActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.chat_toolbar)
         messageTexField = findViewById(R.id.message_text_field)
         sendButton = findViewById(R.id.send_button)
-
     }
 
     private fun setListeners(){
         setToolbarListener()
         setSendButtonListener()
-
     }
 
     private fun setToolbarListener() {
-        toolbar.setNavigationOnClickListener{
-            finish()
-        }
+        toolbar.setNavigationOnClickListener{ finish() }
     }
 
     private fun setSendButtonListener() {
         sendButton.setOnClickListener{
             sendMessage(messageTexField.text.toString())
+            messageTexField.setText("")
         }
     }
 
-    private fun sendMessage(toSend: String){
-        Log.i("CHAT - message to send: ", toSend)
+    private fun sendMessage(text: String){
+        Log.i("CHAT - message to send: ", text)
+
+        myMessagesRef.child("${messages.size}").setValue(MessageModel(null, "1 min", text, true))
+        otherUserMessagesRef.child("${messages.size}").setValue(MessageModel(null, "1 min", text, false))
     }
 
     private fun setupVariables() {
@@ -88,12 +96,29 @@ class ChatActivity : AppCompatActivity() {
 
             val chatId = extras.getString(ExtraKeys.WHOSE_CHAT_USER_ID)!!
 
-            val chatRef = Firebase.database.getReference(
-                "${DatabaseConstants.USERS}/${Firebase.auth.currentUser!!.uid}/${DatabaseConstants.CHATS}/${chatId}")
+            val path = "${DatabaseConstants.USERS}/${Firebase.auth.currentUser!!.uid}/${DatabaseConstants.CHATS}/${chatId}"
+            chatRef = Firebase.database.getReference(path)
+            myMessagesRef = chatRef.child(DatabaseConstants.MESSAGES)
+            val messagesListener = object: ValueEventListener {
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                            val unMutableMessages = dataSnapshot.getValue<List<MessageModel>>()
+                            messages = unMutableMessages as MutableList<MessageModel>
+                            adapter.configure(messages)
+                            recyclerView.scrollToPosition(messages.size-1)
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {}
+            }
+
+            myMessagesRef.addValueEventListener(messagesListener)
+
             chatRef.get().addOnSuccessListener { data ->
                 val chatServiceModel = data.getValue<ChatServiceModel>()
-                messages = chatServiceModel!!.messages!!
-            }.addOnFailureListener { messages = listOf() }
+                messages = chatServiceModel!!.messages!! as MutableList<MessageModel>
+            }.addOnFailureListener { messages = mutableListOf() }
 
             val database = Firebase.database
             val usersRef = database.getReference(DatabaseConstants.USERS)
@@ -104,11 +129,11 @@ class ChatActivity : AppCompatActivity() {
             getOtherServiceUserTask.addOnSuccessListener { otherUserDataSnapshot ->
                 val otherServiceModel = otherUserDataSnapshot.getValue<UserServiceModel>()!!
                 otherUser = UserModel(otherUserId, otherServiceModel.nickname!!, null, otherServiceModel.imageName, otherServiceModel.profession!!, null)
+                otherUserMessagesRef = Firebase.database.getReference(
+                                    "${DatabaseConstants.USERS}/${otherUser.id}/${DatabaseConstants.CHATS}/${DatabaseConstants.MESSAGES}")
 
-
-                val imageRef = storageRef.child("images/${otherUser.imageName}")
+                val imageRef = storageRef.child("${DatabaseConstants.IMAGES}/${otherUser.imageName}")
                 imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { byteArray ->
-                    Log.i("```", "imageRef was downed successfully")
                     val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size);
                     otherUser.image = bitmap
 
@@ -120,7 +145,6 @@ class ChatActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun setUpHeader(){
         username.text = otherUser.nickname
