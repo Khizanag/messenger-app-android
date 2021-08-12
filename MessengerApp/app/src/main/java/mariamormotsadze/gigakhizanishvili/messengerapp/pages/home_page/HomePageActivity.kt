@@ -1,10 +1,8 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +25,6 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page.ProfilePageFragmentControllerInterface
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignInActivity
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants.ONE_MEGABYTE
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.DatabaseConstants
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
@@ -146,18 +143,14 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
     private fun setupBottomTabBar() {
         setupFab()
 
-        homeFragment = HomeFragment(user)
-        homeFragment.onChatItemClick = { chatRowModel ->
-            val intent = Intent(this, ChatActivity::class.java)
-            val chatToDisplay = user.chats?.get(chatRowModel.otherUser.id)!!
-            Log.i("```", "chatsToDisplay: $chatToDisplay")
-            intent.putExtra(ExtraKeys.CHAT_TO_DISPLAY, chatToDisplay)
-            Log.i("```", "chatsToDisplay: put in extra succs")
-            startActivity(intent)
-        }
-        profilePageFragment = ProfilePageFragment(this, user)
+        setupHomePageFragment()
+        setupProfilePageFragment()
         makeCurrentFragment(homeFragment)
 
+        setupBottomNavigationView()
+    }
+
+    private fun setupBottomNavigationView() {
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.home_icon -> makeCurrentFragment(homeFragment)
@@ -165,6 +158,22 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
             }
             true
         }
+    }
+
+    private fun setupHomePageFragment() {
+        homeFragment = HomeFragment(user)
+        homeFragment.onChatItemClick = { chatRowModel ->
+            val intent = Intent(this, ChatActivity::class.java)
+            val chatToDisplay = user.chats?.get(chatRowModel.otherUser.id)!!
+            Log.i("```", "chatsToDisplay: $chatToDisplay")
+            intent.putExtra(ExtraKeys.WHOSE_CHAT_USER_ID, chatRowModel.otherUser.id)
+            Log.i("```", "chatsToDisplay: put in extra succs")
+            startActivity(intent)
+        }
+    }
+
+    private fun setupProfilePageFragment() {
+        profilePageFragment = ProfilePageFragment(this, user)
     }
 
     private fun setupFab() {
@@ -194,6 +203,10 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
 
     override fun signOut() {
         Firebase.auth.signOut()
+        openSignInPage()
+    }
+
+    private fun openSignInPage() {
         val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
     }
