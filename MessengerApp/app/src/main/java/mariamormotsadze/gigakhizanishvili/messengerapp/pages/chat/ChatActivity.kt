@@ -34,7 +34,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun setupChatModel() {
-        model = intent.extras!!.getSerializable(ExtraKeys.CHAT_TO_DISPLAY) as ChatModel
+//        model = intent.extras!!.getSerializable(ExtraKeys.CHAT_TO_DISPLAY) as ChatModel
         Log.i("`", "CHAT: $model")
     }
 

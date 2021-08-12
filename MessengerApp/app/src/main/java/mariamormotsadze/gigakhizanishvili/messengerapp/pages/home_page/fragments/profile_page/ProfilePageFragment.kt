@@ -2,6 +2,7 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -13,12 +14,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.storage.FirebaseStorage
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.DatabaseConstants
 
 class ProfilePageFragment(
     private val controller: ProfilePageFragmentControllerInterface,
@@ -30,34 +32,29 @@ class ProfilePageFragment(
     private lateinit var professionTextField: EditText
     private lateinit var updateButton: Button
     private lateinit var signOutButton: Button
+    private val storageRef = FirebaseStorage.getInstance().reference
+    private var savedUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View =  inflater.inflate(R.layout.fragment_profile_page, container, false)
-        profilePhotoView = view.findViewById<View>(R.id.user_avatar) as ImageView
-
-        profilePhotoView.setOnClickListener(){
-            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, Constants.PICK_IMAGE)
-        }
-
-        return view
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK && requestCode == 100){
-            profilePhotoView.setImageURI((data!!.data))
-            // TODO save this profile photo
-        }
+        return inflater.inflate(R.layout.fragment_profile_page, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup(view, savedInstanceState)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && requestCode == Constants.RequestCode.PICK_IMAGE){
+            profilePhotoView.setImageURI((data!!.data))
+            savedUri = data!!.data
+            Log.i("FirebaseStorage", "uri: ${data!!.data}")
+        }
     }
 
     private fun setup(view: View, savedInstanceState: Bundle?) {
@@ -69,10 +66,22 @@ class ProfilePageFragment(
     }
     private fun setupProfilePhoto(view: View, savedInstanceState: Bundle?) {
         profilePhotoView = view.findViewById(R.id.user_avatar)
-        Glide.with(view.context)
-            .load(model.imageUrl)
-            .placeholder(R.drawable.avatar_placeholder)
-            .into(profilePhotoView)
+        profilePhotoView.setOnClickListener { openGallery() }
+
+        val imageRef = storageRef.child("${DatabaseConstants.IMAGES}/${model.imageName}")
+
+        val task = imageRef.downloadUrl
+        task.addOnSuccessListener {
+            Glide.with(view.context)
+                .load(it)
+                .placeholder(R.drawable.avatar_placeholder)
+                .into(profilePhotoView)
+        }.addOnFailureListener{ }
+    }
+
+    private fun openGallery() {
+        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, Constants.RequestCode.PICK_IMAGE)
     }
 
     private fun setupNicknameField(view: View, savedInstanceState: Bundle?) {
@@ -97,18 +106,11 @@ class ProfilePageFragment(
 
     private fun updateLocalUser() {
         updateProfilePhoto()
-        updateNickname()
         updateProfession()
         controller.updateUser(model)
     }
 
-    private fun updateProfilePhoto() {
-        // TODO
-    }
-
-    private fun updateNickname() {
-        model.nickname = nicknameTextField.text.toString()
-    }
+    private fun updateProfilePhoto() {}
 
     private fun updateProfession() {
         model.profession = professionTextField.text.toString()
@@ -118,7 +120,13 @@ class ProfilePageFragment(
         val userRef = FirebaseManager.getSignedInUserReference()
         userRef.child("nickname").setValue(model.nickname)
         userRef.child("profession").setValue(model.profession)
-        // TODO: update remote photo
+        updateProfilePhotoRemotely(userRef)
+    }
+
+    private fun updateProfilePhotoRemotely(userRef: DatabaseReference) {
+        userRef.child("imageName").setValue(model.imageName)
+        val imageRef = storageRef.child("images/" + model.imageName)
+        savedUri?.let { imageRef.putFile(it) }
     }
 
     private fun setupSignOutButton(view: View, savedInstanceState: Bundle?) {
