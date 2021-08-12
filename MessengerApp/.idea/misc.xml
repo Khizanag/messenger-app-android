@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/layout/activity_search_users.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/main_page_chat_cell.xml" value="0.22" />
         <entry key="app/src/main/res/layout/my_message_cell.xml" value="0.1522289766970618" />
+        <entry key="app/src/main/res/layout/search_user_page_cell.xml" value="0.2028985507246377" />
         <entry key="app/src/main/res/layout/their_message_cell.xml" value="0.19010416666666666" />
       </map>
     </option>

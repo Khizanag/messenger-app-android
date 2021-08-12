@@ -2,9 +2,16 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatServiceModel
@@ -42,20 +49,67 @@ class UsersSearchActivity : AppCompatActivity() {
             setup()
         }
         getUserTask.addOnFailureListener { showMessage(R.string.connection_error) }
+
+    }
+
+    private fun setUpSearchBoxListener() {
+        Log.i("GAITANA", "AQ XO MAINC GAITANA")
+        activitySearchUsersBinding.searchBox.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, end: Int) {
+                Log.i("GAITANA", "aradasdasd")
+                search(s.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+
+        })
     }
 
     private fun setup() {
         setupBinding()
+        setUpSearchBoxListener()
         setupUsersRecyclerView()
         setupBackButton()
         setUpAdapter()
     }
 
+    private fun search(filterStr: String){
+        FirebaseDatabase.getInstance().reference
+            .child("/users")
+            .orderByChild("nickname")
+            .startAt(filterStr)
+            .addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    val messages = snapshot.getValue(object: GenericTypeIndicator<HashMap<String, HashMap<String, Any>>>(){})
+                    if (messages != null) {
+                        val list: MutableList<FoundUserModel> = arrayListOf()
+                        for (i in messages) {
+                            val key = i.key
+                            val nickname = i.value["nickname"] as String?
+                            val profession = i.value["profession"] as String?
+                            val image = i.value["image"] as String?
+                            list.add(FoundUserModel(key, nickname, profession, image))
+                        }
+                        adapter.configure(list)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+    }
+
     private fun setUpAdapter() {
-        Log.i("RAGACA", user.chats.toString())
-        adapter = FoundUsersAdapter(listOf(FoundUserModel("sakheli", "gvari", "profesia", "ki"),
-            FoundUserModel("sakheli2", "gvari2", "profesia2", "ki2  ")))
+        Log.d("ADAPTER", "ki")
+//        adapter = FoundUsersAdapter()
+        adapter = FoundUsersAdapter(listOf())
         activitySearchUsersBinding.foundUsersRecyclerView.adapter = adapter
+//        search("gi")
     }
 
     private fun setupUsersRecyclerView() {
