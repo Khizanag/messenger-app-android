@@ -2,7 +2,6 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,12 +16,14 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatMode
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserServiceModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityHomePageBinding
+import mariamormotsadze.gigakhizanishvili.messengerapp.pages.chat.ChatActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home.HomeFragment
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page.ProfilePageFragment
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page.ProfilePageFragmentControllerInterface
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignInActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.DatabaseConstants
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 
 class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInterface {
 
@@ -36,6 +37,7 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
     }
 
     private fun setup() {
+
         val userRef = FirebaseManager.getSignedInUserReference()
         val getUserTask = userRef.get()
 
@@ -46,46 +48,47 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
             if (userId == null || serviceModel == null) {
                 showMessage(R.string.connection_error)
             } else {
-
                 user = UserModel(userId, serviceModel.nickname!!, serviceModel.imageUrl, serviceModel.profession!!, hashMapOf(),)
-
-                var numChatsToLoad = serviceModel.chats!!.size
-
-                fun checkIfChatsAreLoaded() {
-                    synchronized(numChatsToLoad) {
-                        numChatsToLoad--
-                        if(numChatsToLoad == 0) {
-                            setupUI()
-                        }
-                    }
-                }
-
-                serviceModel.chats?.let { serviceChats ->
-                    for((otherUserId, chat) in serviceChats) {
-                        val database = Firebase.database
-                        val usersRef = database.getReference(DatabaseConstants.USERS)
-                        val otherServiceUserRef = usersRef.child(otherUserId)
-
-                        val getOtherServiceUserTask = otherServiceUserRef.get()
-                        getOtherServiceUserTask.addOnSuccessListener { otherUserDataSnapshot ->
-                            val otherServiceUser = otherUserDataSnapshot.getValue<UserServiceModel>()
-                            otherServiceUser?.let {
-                                val otherUser = UserModel(otherUserId, it.nickname!!, it.imageUrl, it.profession!!, null,)
-                                user.chats?.set(otherUserId, ChatModel(otherUser, chat.messages!!))
-                            }
-
-                            checkIfChatsAreLoaded()
-                        }
-                        getOtherServiceUserTask.addOnFailureListener { checkIfChatsAreLoaded() }
-                    }
-                }
+                setupUserChatsAndUI(serviceModel)
             }
         }
         getUserTask.addOnFailureListener { showMessage(R.string.connection_error) }
     }
 
+    private fun setupUserChatsAndUI(serviceModel: UserServiceModel) {
+        var numChatsToLoad = serviceModel.chats!!.size
+
+        fun checkIfChatsAreLoaded() {
+            synchronized(numChatsToLoad) {
+                numChatsToLoad--
+                if(numChatsToLoad == 0) {
+                    setupUI()
+                }
+            }
+        }
+
+        serviceModel.chats?.let { serviceChats ->
+            for((otherUserId, chat) in serviceChats) {
+                val database = Firebase.database
+                val usersRef = database.getReference(DatabaseConstants.USERS)
+                val otherServiceUserRef = usersRef.child(otherUserId)
+
+                val getOtherServiceUserTask = otherServiceUserRef.get()
+                getOtherServiceUserTask.addOnSuccessListener { otherUserDataSnapshot ->
+                    val otherServiceUser = otherUserDataSnapshot.getValue<UserServiceModel>()
+                    otherServiceUser?.let {
+                        val otherUser = UserModel(otherUserId, it.nickname!!, it.imageUrl, it.profession!!, null,)
+                        user.chats?.set(otherUserId, ChatModel(otherUser, chat.messages!!))
+                    }
+
+                    checkIfChatsAreLoaded()
+                }
+                getOtherServiceUserTask.addOnFailureListener { checkIfChatsAreLoaded() }
+            }
+        }
+    }
+
     private fun setupUI() {
-        Log.i("`", "Logged in user $user")
         setupBinding()
         setupNavigationView()
         setupBottomTabBar()
@@ -105,6 +108,12 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
         setupFab()
 
         val homeFragment = HomeFragment(user)
+        homeFragment.onChatItemClick = { chatRowModel ->
+            val intent = Intent(this, ChatActivity::class.java)
+            val chatToDisplay = user.chats?.get(chatRowModel.otherUser.id)!!
+            intent.putExtra(ExtraKeys.CHAT_TO_DISPLAY, chatToDisplay)
+            startActivity(intent)
+        }
         val settingsFragment = ProfilePageFragment(this, user)
         makeCurrentFragment(homeFragment)
 
@@ -120,7 +129,6 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
     private fun setupFab() {
         val fab = activityHomeBinding.searchUsersFloatingButton
         fab.setOnClickListener{
-            Log.i("Home Fragment", "FAB CLICKED")
             val intent = Intent(this, UsersSearchActivity::class.java)
             startActivity(intent)
         }

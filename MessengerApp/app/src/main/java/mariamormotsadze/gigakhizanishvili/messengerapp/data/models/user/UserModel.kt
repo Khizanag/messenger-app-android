@@ -1,6 +1,7 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user
 
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatModel
+import java.io.Serializable
 
 data class UserModel(
     val id: String,
@@ -8,4 +9,4 @@ data class UserModel(
     var imageUrl: String? = null,
     var profession: String,
     var chats: HashMap<String, ChatModel>? = null, // TODO try just Map
-)
+): Serializable

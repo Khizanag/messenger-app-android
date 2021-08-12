@@ -11,6 +11,8 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserMode
 
 class HomeFragment(val user: UserModel) : Fragment() {
 
+    var onChatItemClick: ((ChatRowModel) -> Unit)? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,9 +28,11 @@ class HomeFragment(val user: UserModel) : Fragment() {
 
     private fun init(view: View){
         val chatsRecyclerView: RecyclerView = view.findViewById(R.id.chats_recycler_view)
-        chatsRecyclerView.adapter = ChatsAdapter(user.chats!!.map { pair ->
+        val adapter = ChatsAdapter(user.chats!!.map { pair ->
             val chat = pair.value
             ChatRowModel(chat.otherUser, chat.messages.last().text, chat.messages.last().sendTime!!)
         })
+        adapter.onItemClick = onChatItemClick
+        chatsRecyclerView.adapter = adapter
     }
 }

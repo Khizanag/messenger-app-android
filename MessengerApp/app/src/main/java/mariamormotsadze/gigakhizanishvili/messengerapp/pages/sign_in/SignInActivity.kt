@@ -15,6 +15,8 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageA
 
 class SignInActivity : AppCompatActivity() {
 
+    // TODO: think how to change username
+
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
 
