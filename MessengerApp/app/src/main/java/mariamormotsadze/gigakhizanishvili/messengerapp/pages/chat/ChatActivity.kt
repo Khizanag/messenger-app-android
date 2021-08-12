@@ -79,7 +79,6 @@ class ChatActivity : AppCompatActivity() {
 
     private fun setupVariables() {
         setupChatModel()
-        setUpHeader()
     }
 
     private fun setupChatModel() {
@@ -114,6 +113,7 @@ class ChatActivity : AppCompatActivity() {
                     otherUser.image = bitmap
 
                     Log.i("`", "CHAT: $messages; otherUser: $otherUser")
+                    setUpHeader()
                     adapter = ChatAdapter(messages)
                     recyclerView.adapter = adapter
                 }
