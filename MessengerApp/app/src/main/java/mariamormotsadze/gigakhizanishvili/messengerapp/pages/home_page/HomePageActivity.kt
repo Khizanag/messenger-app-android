@@ -1,7 +1,9 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatModel
@@ -22,6 +25,7 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.profile_page.ProfilePageFragmentControllerInterface
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.UsersSearchActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in.SignInActivity
+import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants.ONE_MEGABYTE
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.DatabaseConstants
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.ExtraKeys
 
@@ -30,6 +34,11 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
     private lateinit var activityHomeBinding: ActivityHomePageBinding
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var user: UserModel
+
+    private val storageRef = FirebaseStorage.getInstance().reference
+
+    private lateinit var homeFragment: HomeFragment
+    private lateinit var profilePageFragment: ProfilePageFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,22 +57,32 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
             if (userId == null || serviceModel == null) {
                 showMessage(R.string.connection_error)
             } else {
-                user = UserModel(userId, serviceModel.nickname!!, serviceModel.imageUrl, serviceModel.profession!!, hashMapOf(),)
-                setupUserChatsAndUI(serviceModel)
+                user = UserModel(userId, serviceModel.nickname!!, null, serviceModel.imageName, serviceModel.profession!!, hashMapOf(),)
+
+                val imageRef = storageRef.child("images/${user.imageName}")
+
+                imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                    val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size);
+                    user.image = bitmap
+
+                    setupUserChatsAndUI(serviceModel)
+                }.addOnFailureListener {}
             }
         }
         getUserTask.addOnFailureListener { showMessage(R.string.connection_error) }
     }
 
     private fun setupUserChatsAndUI(serviceModel: UserServiceModel) {
-        var numChatsToLoad = serviceModel.chats!!.size
+        var numChatsToLoad = serviceModel.chats!!.size * 2 // for other user and for other user's image
 
-        fun checkIfChatsAreLoaded() {
+        fun checkIfServiceHasFinished() {
+            var isFinished: Boolean
             synchronized(numChatsToLoad) {
                 numChatsToLoad--
-                if(numChatsToLoad == 0) {
-                    setupUI()
-                }
+                isFinished = numChatsToLoad == 0
+            }
+            if(isFinished) {
+                setupUI()
             }
         }
 
@@ -77,13 +96,30 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
                 getOtherServiceUserTask.addOnSuccessListener { otherUserDataSnapshot ->
                     val otherServiceUser = otherUserDataSnapshot.getValue<UserServiceModel>()
                     otherServiceUser?.let {
-                        val otherUser = UserModel(otherUserId, it.nickname!!, it.imageUrl, it.profession!!, null,)
+                        Log.i("```", "otherServiceUser: $otherServiceUser")
+                        val otherUser = UserModel(
+                            otherUserId,
+                            it.nickname!!,
+                            null,
+                            it.imageName,
+                            it.profession!!,
+                            null,
+                        )
+
+                        val imageRef = storageRef.child("images/${otherUser.imageName}")
+
+                        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { byteArray ->
+                            Log.i("```", "imageRef was downed successfully")
+
+                            val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size);
+                            otherUser.image = bitmap
+                            checkIfServiceHasFinished()
+                        }.addOnFailureListener { checkIfServiceHasFinished() }
+
                         user.chats?.set(otherUserId, ChatModel(otherUser, chat.messages!!))
                     }
-
-                    checkIfChatsAreLoaded()
-                }
-                getOtherServiceUserTask.addOnFailureListener { checkIfChatsAreLoaded() }
+                    checkIfServiceHasFinished()
+                }.addOnFailureListener { checkIfServiceHasFinished() }
             }
         }
     }
@@ -107,23 +143,37 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
     private fun setupBottomTabBar() {
         setupFab()
 
-        val homeFragment = HomeFragment(user)
-        homeFragment.onChatItemClick = { chatRowModel ->
-            val intent = Intent(this, ChatActivity::class.java)
-            val chatToDisplay = user.chats?.get(chatRowModel.otherUser.id)!!
-            intent.putExtra(ExtraKeys.CHAT_TO_DISPLAY, chatToDisplay)
-            startActivity(intent)
-        }
-        val settingsFragment = ProfilePageFragment(this, user)
+        setupHomePageFragment()
+        setupProfilePageFragment()
         makeCurrentFragment(homeFragment)
 
+        setupBottomNavigationView()
+    }
+
+    private fun setupBottomNavigationView() {
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.home_icon -> makeCurrentFragment(homeFragment)
-                R.id.settings_icon -> makeCurrentFragment(settingsFragment)
+                R.id.settings_icon -> makeCurrentFragment(profilePageFragment)
             }
             true
         }
+    }
+
+    private fun setupHomePageFragment() {
+        homeFragment = HomeFragment(user)
+        homeFragment.onChatItemClick = { chatRowModel ->
+            val intent = Intent(this, ChatActivity::class.java)
+            val chatToDisplay = user.chats?.get(chatRowModel.otherUser.id)!!
+            Log.i("```", "chatsToDisplay: $chatToDisplay")
+            intent.putExtra(ExtraKeys.WHOSE_CHAT_USER_ID, chatRowModel.otherUser.id)
+            Log.i("```", "chatsToDisplay: put in extra succs")
+            startActivity(intent)
+        }
+    }
+
+    private fun setupProfilePageFragment() {
+        profilePageFragment = ProfilePageFragment(this, user)
     }
 
     private fun setupFab() {
@@ -153,6 +203,10 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
 
     override fun signOut() {
         Firebase.auth.signOut()
+        openSignInPage()
+    }
+
+    private fun openSignInPage() {
         val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
     }

@@ -7,9 +7,7 @@ import android.widget.Toast
 import com.google.firebase.database.ktx.getValue
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.chat.ChatServiceModel
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserFactory
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserServiceModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySearchUsersBinding
@@ -32,7 +30,8 @@ class UsersSearchActivity : AppCompatActivity() {
                 user = UserModel(
                     userDataSnapshot.key!!,
                     serviceModel.nickname!!,
-                    serviceModel.imageUrl,
+                    null, // image is not needed
+                    serviceModel.imageName,
                     serviceModel.profession!!,
                     hashMapOf(), // chats are not needed
                 )

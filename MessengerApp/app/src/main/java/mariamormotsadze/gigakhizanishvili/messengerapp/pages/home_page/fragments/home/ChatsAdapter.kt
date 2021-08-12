@@ -39,7 +39,7 @@ class ChatsAdapter(private val initialData: List<ChatRowModel>): RecyclerView.Ad
 
         fun bind(model: ChatRowModel) = with(itemView) {
             Glide.with(itemView.context)
-                .load(model.otherUser.imageUrl)
+                .load(model.otherUser.image)
                 .placeholder(R.drawable.avatar_placeholder)
                 .into(profilePhotoView)
             nicknameTextView.text = model.otherUser.nickname

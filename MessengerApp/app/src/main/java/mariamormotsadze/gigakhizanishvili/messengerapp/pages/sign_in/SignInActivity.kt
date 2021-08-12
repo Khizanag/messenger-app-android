@@ -1,28 +1,34 @@
 
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.sign_in
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
 import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivityMainBinding
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
+import java.io.ByteArrayOutputStream
+import kotlin.concurrent.thread
 
 class SignInActivity : AppCompatActivity() {
 
-    // TODO: think how to change username
-
     private lateinit var activityMainBinding: ActivityMainBinding
-    private lateinit var auth: FirebaseAuth
+
+    private val auth = Firebase.auth
+    private val storageRef = FirebaseStorage.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        Firebase.auth.signOut()
+
         if(isUserSignedIn()) {
             openHomePage()
         } else {
@@ -30,17 +36,12 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun isUserSignedIn() = Firebase.auth.currentUser != null
+    private fun isUserSignedIn() = auth.currentUser != null
 
     private fun setup() {
         setupBinding()
-        setupDatabase()
         setupTextFields()
         setupButtons()
-    }
-
-    private fun setupDatabase() {
-        auth = Firebase.auth
     }
 
     private fun setupTextFields() {
@@ -70,8 +71,6 @@ class SignInActivity : AppCompatActivity() {
         activityMainBinding.signInButton.setOnClickListener{
             val nickname = activityMainBinding.loginNicknameTextField.text.toString()
             val password = activityMainBinding.loginPasswordTextField.text.toString()
-
-            Log.i("`login`", "nickname: $nickname, password: $password")
 
             if (isInputValid(nickname, password)) {
                 signIn(nickname, password)
