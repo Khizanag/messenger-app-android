@@ -71,10 +71,7 @@ class HomePageActivity : AppCompatActivity(), ProfilePageFragmentControllerInter
                             val otherServiceUser = otherUserDataSnapshot.getValue<UserServiceModel>()
                             otherServiceUser?.let {
                                 val otherUser = UserModel(otherUserId, it.nickname!!, it.imageUrl, it.profession!!, null,)
-                                chat.messages?.let{ messages ->
-                                    val sortedMessages = messages.map { pair -> pair.value }.sortedBy { message -> message.sendTime }
-                                    user.chats?.set(otherUserId, ChatModel(otherUser, sortedMessages))
-                                }
+                                user.chats?.set(otherUserId, ChatModel(otherUser, chat.messages!!))
                             }
 
                             checkIfChatsAreLoaded()

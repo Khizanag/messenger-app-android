@@ -5,5 +5,5 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.message.Messa
 
 @IgnoreExtraProperties
 data class ChatServiceModel(
-    var messages: HashMap<String, MessageModel>? = null,
+    var messages: List<MessageModel>? = null,
 )

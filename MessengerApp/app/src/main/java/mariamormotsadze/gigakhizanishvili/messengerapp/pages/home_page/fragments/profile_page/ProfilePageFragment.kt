@@ -12,7 +12,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.firebase.FirebaseManager
 import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 
@@ -36,8 +40,6 @@ class ProfilePageFragment(
         profilePhotoView = view.findViewById<View>(R.id.user_avatar) as ImageView
 
         profilePhotoView.setOnClickListener(){
-            Log.i("Setting Page", "avatar pressed")
-
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, Constants.PICK_IMAGE)
         }
@@ -49,6 +51,7 @@ class ProfilePageFragment(
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK && requestCode == 100){
             profilePhotoView.setImageURI((data!!.data))
+            // TODO save this profile photo
         }
     }
 
@@ -66,10 +69,10 @@ class ProfilePageFragment(
     }
     private fun setupProfilePhoto(view: View, savedInstanceState: Bundle?) {
         profilePhotoView = view.findViewById(R.id.user_avatar)
-//        Glide.with(view.context)
-//            .load(model.imageUrl)
-//            .placeholder(R.drawable.avatar_image_placeholder)
-//            .into(profilePhotoView)
+        Glide.with(view.context)
+            .load(model.imageUrl)
+            .placeholder(R.drawable.avatar_placeholder)
+            .into(profilePhotoView)
     }
 
     private fun setupNicknameField(view: View, savedInstanceState: Bundle?) {
@@ -112,7 +115,10 @@ class ProfilePageFragment(
     }
 
     private fun updateRemoteUser() {
-        // TODO
+        val userRef = FirebaseManager.getSignedInUserReference()
+        userRef.child("nickname").setValue(model.nickname)
+        userRef.child("profession").setValue(model.profession)
+        // TODO: update remote photo
     }
 
     private fun setupSignOutButton(view: View, savedInstanceState: Bundle?) {
