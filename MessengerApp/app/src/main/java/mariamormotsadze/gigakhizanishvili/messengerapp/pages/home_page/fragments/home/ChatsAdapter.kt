@@ -1,6 +1,5 @@
 package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragments.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import mariamormotsadze.gigakhizanishvili.messengerapp.R
-import mariamormotsadze.gigakhizanishvili.messengerapp.pages.search_users.FoundUserModel
 
 class ChatsAdapter(private val initialData: List<ChatRowModel>): RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
@@ -20,7 +18,7 @@ class ChatsAdapter(private val initialData: List<ChatRowModel>): RecyclerView.Ad
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.search_user_page_cell, parent, false)
+                .inflate(R.layout.main_page_chat_cell, parent, false)
         )
     }
 
@@ -34,17 +32,21 @@ class ChatsAdapter(private val initialData: List<ChatRowModel>): RecyclerView.Ad
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val profilePhotoView: ImageView = itemView.findViewById(R.id.avatar_image_view)
+        private val profilePhotoView: ImageView = itemView.findViewById(R.id.main_page_avatar)
         private val nicknameTextView: TextView = itemView.findViewById(R.id.nickname_text_view)
-        private val professionTextView: TextView = itemView.findViewById(R.id.profession_text_view)
+        private val lastMessageTextView: TextView = itemView.findViewById(R.id.main_page_message_preview)
+        private val lastMessageTimeTextView: TextView = itemView.findViewById(R.id.time_from_last_message_text_view)
 
         fun bind(model: ChatRowModel) = with(itemView) {
             Glide.with(itemView.context)
-                .load(model.profilePhoto)
+                .load(model.otherUser.imageUrl)
                 .placeholder(R.drawable.avatar_placeholder)
                 .into(profilePhotoView)
-            nicknameTextView.text = model.nickname
-//            professionTextView.text = model.profession
+            nicknameTextView.text = model.otherUser.nickname
+
+            lastMessageTextView.text = model.lastMessage
+            lastMessageTimeTextView.text = model.timeFromLastMessage
+
             setOnClickListener {
                 onItemClick?.invoke(model)
             }

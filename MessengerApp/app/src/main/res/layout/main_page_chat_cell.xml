@@ -43,7 +43,7 @@
 
     <!-- message delivery time -->
     <TextView
-        android:id="@+id/message_delivery_time"
+        android:id="@+id/time_from_last_message_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/main_page_message_preview_text_size"

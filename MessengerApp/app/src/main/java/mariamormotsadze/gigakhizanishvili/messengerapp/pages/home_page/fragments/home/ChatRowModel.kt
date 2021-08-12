@@ -2,17 +2,16 @@ package mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.fragment
 
 import android.media.Image
 import com.google.firebase.database.IgnoreExtraProperties
+import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
 import java.util.*
-
 
 // this class supports each recycler view row on
 // home page's home fragment
-@IgnoreExtraProperties
 data class ChatRowModel(
-    val id: String? = null,
-    val secondPersonId: String? = null,
-    val nickname: String? = null,
+    val otherUser: UserModel,
     val lastMessage: String? = null,
-    val lastMessageSendingTime: Date? = null,
-    val profilePhoto: Image? = null,
-)
+    private val lastMessageSendingTime: String,
+) {
+    val timeFromLastMessage: String = "$lastMessageSendingTime"
+    // TODO change for correct format
+}

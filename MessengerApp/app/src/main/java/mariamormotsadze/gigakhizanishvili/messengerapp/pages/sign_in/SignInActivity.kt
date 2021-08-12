@@ -20,6 +20,7 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if(isUserSignedIn()) {
             openHomePage()
         } else {

@@ -6,11 +6,4 @@ object UserFactory {
         model.imageUrl,
         model.profession,
     )
-
-    fun toModel(userId: String, serviceModel: UserServiceModel) = UserModel(
-        userId,
-        serviceModel.nickname!!,
-        serviceModel.imageUrl,
-        serviceModel.profession!!,
-    )
 }

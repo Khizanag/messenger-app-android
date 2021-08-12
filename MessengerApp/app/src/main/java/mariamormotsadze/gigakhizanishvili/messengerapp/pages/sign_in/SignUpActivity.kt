@@ -18,7 +18,6 @@ import mariamormotsadze.gigakhizanishvili.messengerapp.databinding.ActivitySignU
 import mariamormotsadze.gigakhizanishvili.messengerapp.pages.home_page.HomePageActivity
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.Constants
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.DatabaseConstants
-import mariamormotsadze.gigakhizanishvili.messengerapp.shared.usecases.SignUpUseCase.signUp
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -72,8 +71,8 @@ class SignUpActivity : AppCompatActivity() {
                     auth.currentUser?.let { firebaseUser ->
                         val userId = firebaseUser.uid
                         val imageUrl = null // TODO
-                        val serviceUser = UserServiceModel(nickname, imageUrl, profession)
-                        insertUserIntoDatabase(serviceUser, firebaseUser.uid)
+                        val serviceUser = UserServiceModel(nickname, imageUrl, profession, hashMapOf())
+                        insertUserIntoDatabase(serviceUser, userId)
                         openHomePage()
                     }
                 } else {

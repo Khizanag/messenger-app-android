@@ -7,10 +7,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.fake_data.FakeUserData
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserFactory
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserModel
-import mariamormotsadze.gigakhizanishvili.messengerapp.data.models.user.UserServiceModel
 import mariamormotsadze.gigakhizanishvili.messengerapp.shared.DatabaseConstants
 
 object FirebaseManager {
