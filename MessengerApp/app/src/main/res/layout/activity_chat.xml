@@ -101,7 +101,7 @@
 
             <ImageButton
                 android:id="@+id/send_button"
-                android:layout_marginStart="-60dp"
+                android:layout_marginStart="-100dp"
                 android:layout_marginTop="30dp"
                 style="?android:buttonBarButtonStyle"
                 android:paddingBottom="5dp"

@@ -46,6 +46,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messageTexField: EditText
     private lateinit var sendButton: ImageButton
 
+    private var isSetUpDone = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -102,11 +104,11 @@ class ChatActivity : AppCompatActivity() {
             val messagesListener = object: ValueEventListener {
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                            val unMutableMessages = dataSnapshot.getValue<List<MessageModel>>()
-                            messages = unMutableMessages as MutableList<MessageModel>
-                            adapter.configure(messages)
-                            recyclerView.scrollToPosition(messages.size-1)
+                    if (dataSnapshot.exists() && isSetUpDone) {
+                        val unMutableMessages = dataSnapshot.getValue<List<MessageModel>>()
+                        messages = unMutableMessages as MutableList<MessageModel>
+                        adapter.configure(messages)
+                        recyclerView.scrollToPosition(messages.size-1)
                     }
                 }
 
@@ -141,6 +143,7 @@ class ChatActivity : AppCompatActivity() {
                     setUpHeader()
                     adapter = ChatAdapter(messages)
                     recyclerView.adapter = adapter
+                    isSetUpDone = true
                 }
             }
         }
